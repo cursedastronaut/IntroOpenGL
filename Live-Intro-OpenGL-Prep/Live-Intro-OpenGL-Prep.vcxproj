@@ -146,13 +146,16 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Live-Intro-OpenGL-Prep.cpp" />
+    <ClCompile Include="src\draw.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\..\..\..\Downloads\draw.h" />
     <ClInclude Include="external\include\freeglut\GL\freeglut.h" />
     <ClInclude Include="external\include\freeglut\GL\freeglut_ext.h" />
     <ClInclude Include="external\include\freeglut\GL\freeglut_std.h" />
     <ClInclude Include="external\include\freeglut\GL\freeglut_ucall.h" />
     <ClInclude Include="external\include\freeglut\GL\glut.h" />
+    <ClInclude Include="src\draw.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

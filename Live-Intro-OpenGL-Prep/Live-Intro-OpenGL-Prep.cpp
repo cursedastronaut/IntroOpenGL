@@ -2,7 +2,8 @@
 //
 
 #include <iostream>
-#include "freeglut/GL/freeglut.h"
+
+#include "src/draw.h"
 
 void display();
 
@@ -19,40 +20,10 @@ int main(int argc, char *argv[])
 }
 
 void display() {
-    glBegin(GL_TRIANGLES); 
-    glColor3f(1, 1, 0);
-    glVertex3f(0.0f, 0.0f, 0.0f);
-    glColor3f(1, 0, 0);
-    glVertex3f(0.0f, 1.0f, 0.0f);
-    glColor3f(0, 1, 1);
-    glVertex3f(1.0f, 0.0f, 0.0f);
-    glEnd();
-    glBegin(GL_TRIANGLES);
-    glColor3f(1, 1, 0);
-    glVertex3f(0.0f, 0.0f, 0.0f);
-    glColor3f(1, 0, 1);
-    glVertex3f(0.0f, -1.0f, 0.0f);
-    glColor3f(0, 0, 1);
-    glVertex3f(-1.0f, 0.0f, 0.0f);
-    glEnd();
-
-    glBegin(GL_TRIANGLES);
-    glColor3f(1, 1, 0);
-    glVertex3f(0.0f, 0.0f, 0.0f);
-    glColor3f(1, 0, 0);
-    glVertex3f(0.0f, 1.0f, 0.0f);
-    glColor3f(0, 0, 1);
-    glVertex3f(-1.0f, 0.0f, 0.0f);
-    glEnd();
-    glBegin(GL_TRIANGLES);
-    glColor3f(1, 1, 0);
-    glVertex3f(0.0f, 0.0f, 0.0f);
-    glColor3f(1, 0, 1);
-    glVertex3f(0.0f, -1.0f, 0.0f);
-    glColor3f(0, 1, 1);
-    glVertex3f(1.0f, 0.0f, 0.0f);
-    glEnd();
-
+    glClearColor(0, 0, 0, 1);
+    //draw::drawTriangle();
+    //draw::drawQuad(0.5f);
+    draw::drawCube(6, 3, 1);
     glFlush();
 }
 

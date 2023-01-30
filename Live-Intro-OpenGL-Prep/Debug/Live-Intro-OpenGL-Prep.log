@@ -1,0 +1,8 @@
+﻿  Live-Intro-OpenGL-Prep.cpp
+Live-Intro-OpenGL-Prep.obj : error LNK2019: symbole externe non résolu __imp__glutInitWindowPosition@8 référencé dans la fonction _main
+Live-Intro-OpenGL-Prep.obj : error LNK2019: symbole externe non résolu __imp__glutInitWindowSize@8 référencé dans la fonction _main
+Live-Intro-OpenGL-Prep.obj : error LNK2019: symbole externe non résolu __imp__glutInitDisplayMode@4 référencé dans la fonction _main
+Live-Intro-OpenGL-Prep.obj : error LNK2019: symbole externe non résolu __imp____glutInitWithExit@12 référencé dans la fonction _glutInit_ATEXIT_HACK@8
+Live-Intro-OpenGL-Prep.obj : error LNK2019: symbole externe non résolu __imp____glutCreateWindowWithExit@8 référencé dans la fonction _glutCreateWindow_ATEXIT_HACK@4
+C:\Users\e.kubiak\Documents\Cours\GP\GP1\Intro-Rendu-OpenGL\Live-Intro-OpenGL-Prep\Live-Intro-OpenGL-Prep\\external\lib\freeglutd.lib : warning LNK4272: type d'ordinateur bibliothèque 'x64' en conflit avec le type d'ordinateur cible 'x86'
+C:\Users\e.kubiak\Documents\Cours\GP\GP1\Intro-Rendu-OpenGL\Live-Intro-OpenGL-Prep\Debug\Live-Intro-OpenGL-Prep.exe : fatal error LNK1120: 5 externes non résolus

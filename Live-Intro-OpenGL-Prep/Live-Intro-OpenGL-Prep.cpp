@@ -21,7 +21,7 @@ int main(int argc, char *argv[])
 {
     glutInit(&argc, argv);
     glutInitDisplayMode(GLUT_RGBA); 
-    glutInitWindowSize(800, 800);
+    glutInitWindowSize(1024, 576);
     glutInitWindowPosition(0, 0);
     glutCreateWindow("OpenGL Intro - Galaad Martineaux (g.martineaux@student.isartdigital.com)");
     glutDisplayFunc(display);
@@ -37,7 +37,7 @@ void display() {
     glClearColor(0, 0, 0, 1);
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
-    gluPerspective(60, 1, 0.001f, 1000);
+    gluPerspective(60, (float)glutGet(GLUT_WINDOW_WIDTH) / (float)glutGet(GLUT_WINDOW_HEIGHT), 0.001f, 1000);
     
     //Gizmo
     glPushMatrix();

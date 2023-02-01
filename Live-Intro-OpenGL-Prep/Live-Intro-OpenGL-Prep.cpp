@@ -23,7 +23,7 @@ int main(int argc, char *argv[])
     glutInitDisplayMode(GLUT_RGBA); 
     glutInitWindowSize(800, 800);
     glutInitWindowPosition(0, 0);
-    glutCreateWindow("DPRK Forever <3");
+    glutCreateWindow("OpenGL Intro - Galaad Martineaux (g.martineaux@student.isartdigital.com)");
     glutDisplayFunc(display);
     glutTimerFunc(25, update, 0);
     glutMainLoop();
@@ -36,18 +36,39 @@ void display() {
     glDepthFunc(GL_LESS);
     glClearColor(0, 0, 0, 1);
     //draw::drawTriangle();
-    //draw::drawCube(6, 3, 1);
-    //reshape(2, 2);
+    glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
     gluPerspective(60, 1, 0.001f, 1000);
-    glRotatef(angle, 1.0, 0.0f, 1.0f);
-    glTranslatef(-1.0, 1.0, -3.f);
-    draw::drawSphere(50,50);
 
-    glTranslatef(1.0, 1.0, -3.f);
-    draw::drawCube(100, 10, 30);
-    //draw::drawQuad(0.5f);
-    //draw::drawPointSphere(50,50);
+    //Sphere
+    glPushMatrix();
+    glTranslatef(-1.0, 1.0, -3.f);
+    glRotatef(angle, 1.0, 0.0f, 1.0f);
+    draw::drawSphere(50,50); //ACTUAL SPHERE DRAWING
+    glPopMatrix();
+
+
+    //Cube
+    glPushMatrix();
+    glTranslatef(2.0, 2.0, -5.f);
+    glRotatef(angle, 1.0, 0.0f, 1.0f);
+    draw::drawCube(100, 10, 30); //ACTUAL CUBE DRAWING
+    glPopMatrix();
+
+    //Quad
+    glPushMatrix();
+    glTranslatef(0.0, 2.0, -7.f);
+    draw::drawQuad(0.5f); //Actual Quad Drawing
+    glPopMatrix();
+
+    //Point Sphere
+    glPushMatrix();
+    glTranslatef(-1.0, -1.0, -3.f);
+    glRotatef(angle, 1.0, 0.0f, 1.0f);
+    draw::drawPointSphere(50,50); //Actual Point Sphere Drawing
+    glPopMatrix();
+
+
     glFlush();
 }
 

@@ -18,22 +18,12 @@ void draw::drawTriangle()
 // Draw quad centered (halfSize = 0.5)
 void draw::drawQuad(float halfSize)
 {
-    glBegin(GL_TRIANGLES);
-    glColor3f(0, 1, 0);
-    glVertex3f(halfSize, halfSize, 1.0f);
-    glColor3f(0, 1, 0);
-    glVertex3f(halfSize, -halfSize, 1.0f);
-    glColor3f(0, 1, 0);
-    glVertex3f(-halfSize, halfSize, 1.0f);
-    glEnd();
-
-    glBegin(GL_TRIANGLES);
-    glColor3f(0, 1, 0);
-    glVertex3f(-halfSize, -halfSize, 1.0f);
-    glColor3f(0, 1, 0);
-    glVertex3f(-halfSize, halfSize, 1.0f);
-    glColor3f(0, 1, 0);
-    glVertex3f(halfSize, -halfSize, 1.0f);
+    glBegin(GL_QUADS);
+    glColor3f(0,1,0);
+        glVertex3f(-halfSize,  halfSize, 0);
+        glVertex3f( halfSize,  halfSize, 0);
+        glVertex3f( halfSize, -halfSize, 0);
+        glVertex3f(-halfSize, -halfSize, 0);
     glEnd();
 }
 

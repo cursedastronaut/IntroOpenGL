@@ -12,7 +12,7 @@ namespace draw
     void drawCube(float resolutionX, float resolutionY, float resolutionZ);
 
     // Draw sphere (longitudes, lattitudes)
-    void drawSphere(int longitudeResolution, int latitudeResolution);
+    void drawSphere(int longitudeResolution, int latitudeResolution, int kind = GL_QUAD_STRIP);
 	
     // Draw a sphere with points
     void drawPointSphere(int longitudeResolution, int latitudeResolution);

@@ -5,12 +5,10 @@
 // Draw triangle with vertices at (-0.5, -0.5), (0.5, -0.5), (0.0, 0.5)
 void draw::drawTriangle()
 {
+    glColor3f(1, 1, 0);
     glBegin(GL_TRIANGLES);
-    glColor3f(1, 0, 0);
     glVertex3f(-0.5f, -0.5f, 0.0f);
-    glColor3f(1, 0, 0);
     glVertex3f(0.5f, -0.5f, 0.0f);
-    glColor3f(1, 0, 0);
     glVertex3f(0.0f, 0.5f, 0.0f);
     glEnd();
 }
@@ -124,8 +122,52 @@ void draw::drawPointSphere(int longitudeResolution, int latitudeResolution)
     drawSphere(longitudeResolution, latitudeResolution, GL_POINTS);
 }
 
+
+/*
 // Draw cone primitive (res = )
-void draw::drawCone(int res);
+void draw::drawCone(int res)
+{
+    GLUquadricObj* quadric = gluNewQuadric();
+    glColor3f(0, 1, 1);
+    gluQuadricDrawStyle(quadric, GLU_FILL);
+    gluCylinder(quadric, 0.5, 0, 1, res, res);
+    gluDeleteQuadric(quadric);
+    for (int i = 0; i < 360; i+=20)
+    {
+        glRotatef(i, 0, 1, 0);
+        glPushMatrix();
+        glBegin(GL_QUADS);
+        glVertex3f(0, 0, 1);
+        glVertex3f(0, 1.0f, 1);
+        glVertex3f(1, 1.0f, 1);
+        glVertex3f(1, 0, 1);
+        glEnd();
+        glPopMatrix();
+    }
+}
+*/
+
+void draw::drawCone(int res)
+{
+    float radius = 0.5f;
+    float height = 1;
+    glBegin(GL_TRIANGLE_STRIP);
+    for (int i = 0; i <= res; i++) {
+        float angle = (float)i/(float)res * PI*2;
+        glColor3f(((i) % 2) + 0.5f, 0, 0);
+        glVertex3f(radius * cosf(angle), 0, sinf(angle) * radius);
+        glVertex3f(0, height, 0);
+    }
+    glEnd();
+
+    glBegin(GL_POLYGON);
+    for (int i = 0; i <= res; i++) {
+        float angle = (float)i / (float)res * PI * 2;
+        glColor3f(((i) % 2) + 0.5f, 0, 0);
+        glVertex3f(radius * cosf(angle), 0, sinf(angle) * radius);
+    }
+    glEnd();
+}
 
 // Draw gizmo (3 axes from 0.0 to 1.0 of different color)
 void draw::drawGizmo()

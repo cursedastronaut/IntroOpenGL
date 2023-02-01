@@ -35,7 +35,6 @@ void display() {
     glEnable(GL_DEPTH_TEST);
     glDepthFunc(GL_LESS);
     glClearColor(0, 0, 0, 1);
-    //draw::drawTriangle();
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
     gluPerspective(60, 1, 0.001f, 1000);
@@ -47,13 +46,20 @@ void display() {
     draw::drawGizmo();
     glPopMatrix();
     
-
+    
+    
+    //Cone
+    glPushMatrix();
+    glTranslatef(1, -1, -3.f);
+    glRotatef(angle, 1.0f, 1.0f, 0.f);
+    draw::drawCone(5);
+    glPopMatrix();
 
     //Sphere
     glPushMatrix();
     glTranslatef(-1.0, 1.0, -3.f);
     glRotatef(angle, 1.0, 0.0f, 1.0f);
-    draw::drawSphere(50,50); //ACTUAL SPHERE DRAWING
+    draw::drawSphere(35,35); //ACTUAL SPHERE DRAWING
     glPopMatrix();
 
 
@@ -68,6 +74,12 @@ void display() {
     glPushMatrix();
     glTranslatef(0.0, 2.0, -7.f);
     draw::drawQuad(0.5f); //Actual Quad Drawing
+    glPopMatrix();
+    
+    //Triangle
+    glPushMatrix();
+    glTranslatef(0, -1.5f, -5.f);
+    draw::drawTriangle();
     glPopMatrix();
 
     //Point Sphere

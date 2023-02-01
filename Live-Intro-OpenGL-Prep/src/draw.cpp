@@ -128,4 +128,24 @@ void draw::drawPointSphere(int longitudeResolution, int latitudeResolution)
 void draw::drawCone(int res);
 
 // Draw gizmo (3 axes from 0.0 to 1.0 of different color)
-void draw::drawGizmo();
+void draw::drawGizmo()
+{
+    glLineWidth(1.f);
+    glBegin(GL_LINES);
+        glColor3f(0, 0, 1);
+        glVertex3f(0, 0, 0);
+        glVertex3f(0,1,0);
+    glEnd();
+
+    glBegin(GL_LINES);
+        glColor3f(1, 0, 0);
+        glVertex3f(0, 0, 0);
+        glVertex3f(1, 0, 0);
+    glEnd();
+
+    glBegin(GL_LINES);
+        glColor3f(0, 1, 0);
+        glVertex3f(0, 0, 0);
+        glVertex3f(0, 0, 1);
+    glEnd();
+}

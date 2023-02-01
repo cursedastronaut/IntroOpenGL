@@ -39,6 +39,15 @@ void display() {
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
     gluPerspective(60, 1, 0.001f, 1000);
+    
+    //Gizmo
+    glPushMatrix();
+    glTranslatef(0, 0, -6.f);
+    glRotatef(angle, 0.0, 1.0f, 0.f);
+    draw::drawGizmo();
+    glPopMatrix();
+    
+
 
     //Sphere
     glPushMatrix();

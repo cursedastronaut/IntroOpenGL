@@ -1,2 +1,13 @@
-﻿  Live-Intro-OpenGL-Prep.cpp
+﻿  draw.cpp
+C:\Users\g.martineaux\Documents\C++\GP\OpenGL\Live-Intro-OpenGL-Prep\src\draw.cpp(62,23): warning C4244: 'argument' : conversion de 'int' en 'GLfloat', perte possible de données
+C:\Users\g.martineaux\Documents\C++\GP\OpenGL\Live-Intro-OpenGL-Prep\src\draw.cpp(67,21): warning C4244: 'argument' : conversion de 'int' en 'GLfloat', perte possible de données
+C:\Users\g.martineaux\Documents\C++\GP\OpenGL\Live-Intro-OpenGL-Prep\src\draw.cpp(72,26): warning C4244: 'argument' : conversion de 'int' en 'GLfloat', perte possible de données
+C:\Users\g.martineaux\Documents\C++\GP\OpenGL\Live-Intro-OpenGL-Prep\src\draw.cpp(85,24): warning C4244: 'initialisation' : conversion de 'double' en 'float', perte possible de données
+C:\Users\g.martineaux\Documents\C++\GP\OpenGL\Live-Intro-OpenGL-Prep\src\draw.cpp(86,19): warning C4244: 'initialisation' : conversion de 'double' en 'float', perte possible de données
+C:\Users\g.martineaux\Documents\C++\GP\OpenGL\Live-Intro-OpenGL-Prep\src\draw.cpp(87,19): warning C4244: 'initialisation' : conversion de 'double' en 'float', perte possible de données
+C:\Users\g.martineaux\Documents\C++\GP\OpenGL\Live-Intro-OpenGL-Prep\src\draw.cpp(89,25): warning C4244: 'initialisation' : conversion de 'double' en 'float', perte possible de données
+C:\Users\g.martineaux\Documents\C++\GP\OpenGL\Live-Intro-OpenGL-Prep\src\draw.cpp(90,18): warning C4244: 'initialisation' : conversion de 'double' en 'float', perte possible de données
+C:\Users\g.martineaux\Documents\C++\GP\OpenGL\Live-Intro-OpenGL-Prep\src\draw.cpp(91,19): warning C4244: 'initialisation' : conversion de 'double' en 'float', perte possible de données
+C:\Users\g.martineaux\Documents\C++\GP\OpenGL\Live-Intro-OpenGL-Prep\src\draw.cpp(96,21): warning C4244: 'initialisation' : conversion de 'double' en 'float', perte possible de données
+C:\Users\g.martineaux\Documents\C++\GP\OpenGL\Live-Intro-OpenGL-Prep\src\draw.cpp(97,21): warning C4244: 'initialisation' : conversion de 'double' en 'float', perte possible de données
   Live-Intro-OpenGL-Prep.vcxproj -> C:\Users\g.martineaux\Documents\C++\GP\OpenGL\x64\Debug\Live-Intro-OpenGL-Prep.exe

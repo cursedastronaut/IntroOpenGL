@@ -1,6 +1,6 @@
 #include "draw.h"
 #include <math.h>
-#define PI 3.141592f
+
 
 // Draw triangle with vertices at (-0.5, -0.5), (0.5, -0.5), (0.0, 0.5)
 void draw::drawTriangle()

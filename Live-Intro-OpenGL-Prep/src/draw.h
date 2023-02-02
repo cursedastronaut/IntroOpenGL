@@ -1,5 +1,6 @@
 #pragma once
 #include "freeglut/GL/freeglut.h"
+#define PI 3.141592f
 namespace draw
 {
     // Draw triangle with vertices at (-0.5, -0.5), (0.5, -0.5), (0.0, 0.5)

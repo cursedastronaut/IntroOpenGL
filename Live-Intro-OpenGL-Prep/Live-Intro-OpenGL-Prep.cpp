@@ -29,6 +29,7 @@ void update(int value) {
 
 //Handles rendering mode switching, and the Camera Angle.
 void keyboard(unsigned char key, int x, int y) {
+    printf("camera %f\n", app->cameraAngle);
     switch (key)
     {
     case 56: app->orthoRendering = false; break;
@@ -89,16 +90,22 @@ void display() {
     
     //Instead of moving the perspective camera up and down, we move the whole world (and its sub-worlds) up and down depending on user input.
     if (!app->orthoRendering)
-        glTranslatef(app->fx, app->fy, 0);
+        //glTranslatef(app->fx, app->fy, 0);
+        gluLookAt(app->fx, app->fy, 0.0f,
+            app->fx + cosf(app->cameraAngle * (PI / 180.f))  + sinf(app->cameraAngle * (PI / 180.f)), app->fy, app->fz + cosf(app->cameraAngle * (PI / 180.f)) - sinf(app->cameraAngle * (PI / 180.f)),
+            0, 1, 0);
+
+    //printf("angle : %f\n", app->angle);
+    //printf("answer : %f\n", app->fx + cosf(app->angle * (PI / 180.f)) + sinf(app->angle * (PI / 180.f)));
     //Instead of rotating the cameras, we rotate the whole world (and its sub-worlds) depending on user input.
-    glRotatef(app->cameraAngle, 0.0, 1.0f, 0.f);
+    //glRotatef(app->cameraAngle, 0.0, 1.0f, 0.f);
 
 
 
     //Gizmo
     glPushMatrix();
         glTranslatef(0, 0, -6.f);
-        glRotatef(app->angle, 0.0, 1.0f, 0.f);
+       // glRotatef(app->angle, 0.0, 1.0f, 0.f);
         draw::drawGizmo();
     glPopMatrix();
     

@@ -3,23 +3,20 @@
 
 #include <iostream>
 
-#include "src/draw.h"
+#include "src/app.h"
 
-float angle = 0.0f;
-float cameraAngle = 0.0f;
-bool orthoRendering = 0;
-float fx, fy = 0;
+App* app = new App();
 
 void display();
 void update(int value) {
-    angle += 2.f;
-    if (angle > 360)
-        angle -= 360.f;
+    app->angle += 2.f;
+    if (app->angle > 360)
+        app->angle -= 360.f;
 
-    if (cameraAngle == 0)
-        cameraAngle = 360.f;
-    else if (cameraAngle > 360.f)
-        cameraAngle -= 360.f;
+    if (app->cameraAngle == 0)
+        app->cameraAngle = 360.f;
+    else if (app->cameraAngle > 360.f)
+        app->cameraAngle -= 360.f;
     glutPostRedisplay();
     glutTimerFunc(25, update, 0);
 }
@@ -27,25 +24,27 @@ void update(int value) {
 void keyboard(unsigned char key, int x, int y) {
     switch (key)
     {
-    case 56: orthoRendering = false; break;
-    case 57: orthoRendering = true; break;
-    case 110: cameraAngle++; break;
-    case 109: cameraAngle--; break;
+    case 56: app->orthoRendering = false; break;
+    case 57: app->orthoRendering = true; break;
+    case 110: app->cameraAngle++; break;
+    case 109: app->cameraAngle--; break;
     }
 }
 void keyboard2(int key, int x, int y)
 {
     switch (key)
     {
-    case 100: fx -= 0.1f; break;
-    case 101: fy += 0.1f; break;
-    case 102: fx += 0.1f; break;
-    case 103: fy -= 0.1f; break;
+    case 100: app->fx -= 0.1f; break;
+    case 101: app->fy += 0.1f; break;
+    case 102: app->fx += 0.1f; break;
+    case 103: app->fy -= 0.1f; break;
     }
 }
 
+
 int main(int argc, char *argv[])
 {
+
     glutInit(&argc, argv);
     glutInitDisplayMode(GLUT_RGBA); 
     glutInitWindowSize(1024, 576);
@@ -66,22 +65,23 @@ void display() {
     glClearColor(0, 0, 0, 1);
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
-    if (!orthoRendering)
+    if (!app->orthoRendering)
         gluPerspective(60, (float)glutGet(GLUT_WINDOW_WIDTH) / (float)glutGet(GLUT_WINDOW_HEIGHT), 0.001f, 1000);
     else
-        glOrtho(-(float)glutGet(GLUT_WINDOW_WIDTH)/ 1024 *3.f + fx/2,
-                 (float)glutGet(GLUT_WINDOW_WIDTH) / 1024 * 3.f + fx/2,
-                -(float)glutGet(GLUT_WINDOW_HEIGHT) / 576 * 3.f +fy/2,
-                 (float)glutGet(GLUT_WINDOW_HEIGHT) / 576 * 3.f +fy/2, 0.001f, 1000);
+        glOrtho(-(float)glutGet(GLUT_WINDOW_WIDTH)  / 1024 * 3.f + app->fx/2,
+                 (float)glutGet(GLUT_WINDOW_WIDTH)  / 1024 * 3.f + app->fx/2,
+                -(float)glutGet(GLUT_WINDOW_HEIGHT) / 576  * 3.f + app->fy/2,
+                 (float)glutGet(GLUT_WINDOW_HEIGHT) / 576  * 3.f + app->fy/2, 
+                0.001f, 1000);
     
     
-    if (!orthoRendering)
-        glTranslatef(fx, fy, 0);
-    glRotatef(cameraAngle, 0.0, 1.0f, 0.f);
+    if (!app->orthoRendering)
+        glTranslatef(app->fx, app->fy, 0);
+    glRotatef(app->cameraAngle, 0.0, 1.0f, 0.f);
     //Gizmo
     glPushMatrix();
     glTranslatef(0, 0, -6.f);
-    glRotatef(angle, 0.0, 1.0f, 0.f);
+    glRotatef(app->angle, 0.0, 1.0f, 0.f);
     draw::drawGizmo();
     glPopMatrix();
     
@@ -90,14 +90,14 @@ void display() {
     //Cone
     glPushMatrix();
     glTranslatef(1, -1, -3.f);
-    glRotatef(angle, 1.0f, 1.0f, 0.f);
+    glRotatef(app->angle, 1.0f, 1.0f, 0.f);
     draw::drawCone(5);
     glPopMatrix();
 
     //Sphere
     glPushMatrix();
     glTranslatef(-1.0, 1.0, -3.f);
-    glRotatef(angle, 1.0, 0.0f, 1.0f);
+    glRotatef(app->angle, 1.0, 0.0f, 1.0f);
     draw::drawSphere(35,35); //ACTUAL SPHERE DRAWING
     glPopMatrix();
 
@@ -105,7 +105,7 @@ void display() {
     //Cube
     glPushMatrix();
     glTranslatef(2.0, 2.0, -5.f);
-    glRotatef(angle, 1.0, 0.0f, 1.0f);
+    glRotatef(app->angle, 1.0, 0.0f, 1.0f);
     draw::drawCube(100, 10, 30); //ACTUAL CUBE DRAWING
     glPopMatrix();
 
@@ -124,7 +124,7 @@ void display() {
     //Point Sphere
     glPushMatrix();
     glTranslatef(-1.0, -1.0, -3.f);
-    glRotatef(angle, 1.0, 0.0f, 1.0f);
+    glRotatef(app->angle, 1.0, 0.0f, 1.0f);
     draw::drawPointSphere(50,50); //Actual Point Sphere Drawing
     glPopMatrix();
 

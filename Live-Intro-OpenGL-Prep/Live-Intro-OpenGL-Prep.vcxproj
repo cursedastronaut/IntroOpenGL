@@ -146,6 +146,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Live-Intro-OpenGL-Prep.cpp" />
+    <ClCompile Include="src\app.cpp" />
     <ClCompile Include="src\draw.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -156,6 +157,7 @@
     <ClInclude Include="external\include\freeglut\GL\freeglut_ucall.h" />
     <ClInclude Include="external\include\freeglut\GL\glut.h" />
     <ClInclude Include="src\draw.h" />
+    <ClInclude Include="src\app.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

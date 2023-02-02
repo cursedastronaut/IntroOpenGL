@@ -5,16 +5,43 @@
 
 #include "src/draw.h"
 
-float angle = 0.0;
+float angle = 0.0f;
+float cameraAngle = 0.0f;
+bool orthoRendering = 0;
+float fx, fy = 0;
+
 void display();
 void update(int value) {
     angle += 2.f;
-    if (angle > 360) {
-        angle -= 360;
-    }
+    if (angle > 360)
+        angle -= 360.f;
 
+    if (cameraAngle == 0)
+        cameraAngle = 360.f;
+    else if (cameraAngle > 360.f)
+        cameraAngle -= 360.f;
     glutPostRedisplay();
     glutTimerFunc(25, update, 0);
+}
+
+void keyboard(unsigned char key, int x, int y) {
+    switch (key)
+    {
+    case 56: orthoRendering = false; break;
+    case 57: orthoRendering = true; break;
+    case 110: cameraAngle++; break;
+    case 109: cameraAngle--; break;
+    }
+}
+void keyboard2(int key, int x, int y)
+{
+    switch (key)
+    {
+    case 100: fx -= 0.1f; break;
+    case 101: fy += 0.1f; break;
+    case 102: fx += 0.1f; break;
+    case 103: fy -= 0.1f; break;
+    }
 }
 
 int main(int argc, char *argv[])
@@ -25,6 +52,8 @@ int main(int argc, char *argv[])
     glutInitWindowPosition(0, 0);
     glutCreateWindow("OpenGL Intro - Galaad Martineaux (g.martineaux@student.isartdigital.com)");
     glutDisplayFunc(display);
+    glutKeyboardFunc(keyboard);
+    glutSpecialFunc(keyboard2);
     glutTimerFunc(25, update, 0);
     glutMainLoop();
     return 0;
@@ -37,8 +66,18 @@ void display() {
     glClearColor(0, 0, 0, 1);
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
-    gluPerspective(60, (float)glutGet(GLUT_WINDOW_WIDTH) / (float)glutGet(GLUT_WINDOW_HEIGHT), 0.001f, 1000);
+    if (!orthoRendering)
+        gluPerspective(60, (float)glutGet(GLUT_WINDOW_WIDTH) / (float)glutGet(GLUT_WINDOW_HEIGHT), 0.001f, 1000);
+    else
+        glOrtho(-(float)glutGet(GLUT_WINDOW_WIDTH)/ 1024 *3.f + fx/2,
+                 (float)glutGet(GLUT_WINDOW_WIDTH) / 1024 * 3.f + fx/2,
+                -(float)glutGet(GLUT_WINDOW_HEIGHT) / 576 * 3.f +fy/2,
+                 (float)glutGet(GLUT_WINDOW_HEIGHT) / 576 * 3.f +fy/2, 0.001f, 1000);
     
+    
+    if (!orthoRendering)
+        glTranslatef(fx, fy, 0);
+    glRotatef(cameraAngle, 0.0, 1.0f, 0.f);
     //Gizmo
     glPushMatrix();
     glTranslatef(0, 0, -6.f);

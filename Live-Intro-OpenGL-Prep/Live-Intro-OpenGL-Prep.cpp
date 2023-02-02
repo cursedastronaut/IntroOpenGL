@@ -3,6 +3,9 @@
 
 #include <iostream>
 #include "src/app.h"
+#define WIN_HEIGHT 576
+#define WIN_WIDTH 1024
+
 
 //Global creation of the class App.
 App* app = new App();
@@ -53,7 +56,7 @@ int main(int argc, char *argv[])
     //Initialisation
     glutInit(&argc, argv);
     glutInitDisplayMode(GLUT_RGBA); 
-    glutInitWindowSize(1024, 576);
+    glutInitWindowSize(WIN_WIDTH, WIN_HEIGHT);
     glutInitWindowPosition(0, 0);
     glutCreateWindow("OpenGL Intro - Galaad Martineaux (g.martineaux@student.isartdigital.com)");
     glutDisplayFunc(display);
@@ -78,10 +81,10 @@ void display() {
     if (!app->orthoRendering)
         gluPerspective(60, (float)glutGet(GLUT_WINDOW_WIDTH) / (float)glutGet(GLUT_WINDOW_HEIGHT), 0.001f, 1000); 
     else
-        glOrtho(-(float)glutGet(GLUT_WINDOW_WIDTH)  / 1024 * 3.f - app->fx, //TODO: Remove 1024 and 576 and simply put the original height and width.
-                 (float)glutGet(GLUT_WINDOW_WIDTH)  / 1024 * 3.f - app->fx,
-                -(float)glutGet(GLUT_WINDOW_HEIGHT) / 576  * 3.f - app->fy,
-                 (float)glutGet(GLUT_WINDOW_HEIGHT) / 576  * 3.f - app->fy, 
+        glOrtho(-(float)glutGet(GLUT_WINDOW_WIDTH)  / WIN_WIDTH  * 3.f - app->fx, //TODO: Remove 1024 and 576 and simply put the original height and width.
+                 (float)glutGet(GLUT_WINDOW_WIDTH)  / WIN_WIDTH  * 3.f - app->fx,
+                -(float)glutGet(GLUT_WINDOW_HEIGHT) / WIN_HEIGHT * 3.f - app->fy,
+                 (float)glutGet(GLUT_WINDOW_HEIGHT) / WIN_HEIGHT * 3.f - app->fy,
                 0.001f, 1000);
     
     //Instead of moving the perspective camera up and down, we move the whole world (and its sub-worlds) up and down depending on user input.
@@ -120,7 +123,7 @@ void display() {
     glPushMatrix();
         glTranslatef(2.0, 2.0, -5.f);
         glRotatef(app->angle, 1.0, 0.0f, 1.0f);
-        draw::drawCube(100, 10, 30); //ACTUAL CUBE DRAWING
+        draw::drawCube(10, 10, 30); //ACTUAL CUBE DRAWING
     glPopMatrix();
 
 

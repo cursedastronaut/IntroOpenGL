@@ -60,7 +60,7 @@ void draw::drawCube(float resolutionX, float resolutionY, float resolutionZ)
         glRotatef(i*90+90, 0, 1, 0);
         drawResQuad(resolutionX, resolutionY);
     }
-    for (int i = 0; i < 4; i++)
+    for (int i = 0; i < 3; i++)
     {
         glRotatef(i * 90, 0, 1, 0);
         drawResQuad(resolutionZ, resolutionY);
@@ -87,7 +87,7 @@ void draw::drawSphere(int longitudeResolution, int latitudeResolution, int kind)
         float latitude1 = PI * (-0.5 + (float) i / latitudeResolution);
         float z1 = sin(latitude1);
         float zr1 = cos(latitude1);
-        
+
         glBegin(kind);
         for(j = 0; j <= longitudeResolution; j++) {
             float longitude = 2 * PI * (float) (j - 1) / longitudeResolution;

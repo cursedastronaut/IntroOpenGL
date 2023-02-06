@@ -60,19 +60,25 @@ int main(int argc, char *argv[])
     glutInitWindowSize(WIN_WIDTH, WIN_HEIGHT);
     glutInitWindowPosition(0, 0);
     glutCreateWindow("OpenGL Intro - Galaad Martineaux (g.martineaux@student.isartdigital.com)");
+    
+
     glutDisplayFunc(display);
     glutKeyboardFunc(keyboard);
     glutSpecialFunc(keyboard2);
     glutTimerFunc(25, update, 0);
+    glEnable(GL_TEXTURE_2D);
     glutMainLoop();
     return 0;
 }
 
 //Displays stuff
 void display() {
+    app->LoadTexture();
+
     //Clears everything
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glEnable(GL_DEPTH_TEST);
+    glEnable(GL_TEXTURE_2D);
     glDepthFunc(GL_LESS);
     glClearColor(0, 0, 0, 1);
     glMatrixMode(GL_MODELVIEW);
@@ -90,15 +96,11 @@ void display() {
     
     //Instead of moving the perspective camera up and down, we move the whole world (and its sub-worlds) up and down depending on user input.
     if (!app->orthoRendering)
-        //glTranslatef(app->fx, app->fy, 0);
-        gluLookAt(app->fx, app->fy, 0.0f,
-            app->fx + cosf(app->cameraAngle * (PI / 180.f))  + sinf(app->cameraAngle * (PI / 180.f)), app->fy, app->fz + cosf(app->cameraAngle * (PI / 180.f)) - sinf(app->cameraAngle * (PI / 180.f)),
+        gluLookAt(app->fx, app->fy, 0.0f, //Position of the camera
+            app->fx + cosf(app->cameraAngle * (PI / 180.f))  + sinf(app->cameraAngle * (PI / 180.f)), //Looking at X
+            app->fy,                                                                                  //Looking at Y
+            app->fz + cosf(app->cameraAngle * (PI / 180.f)) - sinf(app->cameraAngle * (PI / 180.f)),  //Looking at Z
             0, 1, 0);
-
-    //printf("angle : %f\n", app->angle);
-    //printf("answer : %f\n", app->fx + cosf(app->angle * (PI / 180.f)) + sinf(app->angle * (PI / 180.f)));
-    //Instead of rotating the cameras, we rotate the whole world (and its sub-worlds) depending on user input.
-    //glRotatef(app->cameraAngle, 0.0, 1.0f, 0.f);
 
 
 

@@ -1,4 +1,3 @@
-﻿  Live-Intro-OpenGL-Prep.cpp
-  app.cpp
-  Génération de code en cours...
+﻿  app.cpp
+C:\Users\g.martineaux\Documents\C++\GP\OpenGL\Live-Intro-OpenGL-Prep\src\app.cpp(55,27): warning C4309: '=' : troncation de valeur de constante
   Live-Intro-OpenGL-Prep.vcxproj -> C:\Users\g.martineaux\Documents\C++\GP\OpenGL\x64\Debug\Live-Intro-OpenGL-Prep.exe

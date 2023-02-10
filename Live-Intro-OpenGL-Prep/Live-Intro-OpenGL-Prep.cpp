@@ -67,13 +67,13 @@ int main(int argc, char *argv[])
     glutSpecialFunc(keyboard2);
     glutTimerFunc(25, update, 0);
     glEnable(GL_TEXTURE_2D);
+    app->LoadTexture();
     glutMainLoop();
     return 0;
 }
 
 //Displays stuff
 void display() {
-    app->LoadTexture();
 
     //Clears everything
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);

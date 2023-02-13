@@ -6,9 +6,11 @@ class App
 		App() {};
 		void Update(int value);
 		float angle = 0.0f;
-		float cameraAngle = 135;
+		float cameraAngleH = 135;
+		float cameraAngleV = 0;
 		bool orthoRendering = 0;
-		float fx = 0; float fy = 0; float fz = -1.f;
+		//Camera position
+		float cameraX = 0; float cameraY = 0; float cameraZ = -1.f;
 
 		void LoadTexture();
 };

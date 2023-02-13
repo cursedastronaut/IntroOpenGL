@@ -3,6 +3,8 @@
 #define PI 3.141592f
 namespace draw
 {
+    
+
     // Draw triangle with vertices at (-0.5, -0.5), (0.5, -0.5), (0.0, 0.5)
     void drawTriangle();
 	
@@ -23,5 +25,8 @@ namespace draw
 	
     // Draw gizmo (3 axes from 0.0 to 1.0 of different color)
     void drawGizmo();
+
+    //Draw Maze
+    void drawMaze();
 };
 

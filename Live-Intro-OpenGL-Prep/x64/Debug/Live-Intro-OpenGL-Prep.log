@@ -1,6 +1,2 @@
-﻿  app.cpp
-C:\Users\g.martineaux\Documents\C++\GP\OpenGL\Live-Intro-OpenGL-Prep\src\app.cpp(100,16): warning C4477: 'printf' : la chaîne de format '%x' nécessite un argument de type 'unsigned int', mais l'argument variadique 1 est de type '__int64'
-C:\Users\g.martineaux\Documents\C++\GP\OpenGL\Live-Intro-OpenGL-Prep\src\app.cpp(100,16): message : utilisez '%llx' dans la chaîne de format
-C:\Users\g.martineaux\Documents\C++\GP\OpenGL\Live-Intro-OpenGL-Prep\src\app.cpp(100,16): message : utilisez '%Ix' dans la chaîne de format
-C:\Users\g.martineaux\Documents\C++\GP\OpenGL\Live-Intro-OpenGL-Prep\src\app.cpp(100,16): message : utilisez '%I64x' dans la chaîne de format
+﻿  Live-Intro-OpenGL-Prep.cpp
   Live-Intro-OpenGL-Prep.vcxproj -> C:\Users\g.martineaux\Documents\C++\GP\OpenGL\x64\Debug\Live-Intro-OpenGL-Prep.exe

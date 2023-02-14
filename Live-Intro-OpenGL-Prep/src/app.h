@@ -9,8 +9,11 @@ class App
 		float cameraAngleH = 135;
 		float cameraAngleV = 0;
 		bool orthoRendering = 0;
+		bool isCameraSpeeding = false;
 		//Camera position
-		float cameraX = 0; float cameraY = 0; float cameraZ = -1.f;
+		float cameraX = 2.5f; float cameraY = -0.5f; float cameraZ = 7.f;
 
-		void LoadTexture();
+		GLuint tex;
+
+		GLuint LoadTexture();
 };

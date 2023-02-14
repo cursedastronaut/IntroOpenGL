@@ -29,8 +29,9 @@ void update(int value) {
 
 //Handles rendering mode switching, and the Camera Angle.
 void keyboard(unsigned char key, int x, int y) {
-	printf("camera %c\n", key);
-	printf("cameraz %f\n", app->cameraZ);
+	float speed = 0.01f;
+	if (app->isCameraSpeeding)
+		speed = 0.1f;
 	switch (key)
 	{
 	case 56: app->orthoRendering = false; break;
@@ -39,20 +40,20 @@ void keyboard(unsigned char key, int x, int y) {
 	case 109: app->cameraAngleH--; break;
 
 	case 's': 
-		app->cameraX -= (cosf(app->cameraAngleH * (PI / 180.f)) + sinf(app->cameraAngleH * (PI / 180.f))) * 0.3f;
-		app->cameraZ -= (cosf(app->cameraAngleH * (PI / 180.f)) - sinf(app->cameraAngleH * (PI / 180.f))) * 0.3f;
+		app->cameraX -= (cosf(app->cameraAngleH * (PI / 180.f)) + sinf(app->cameraAngleH * (PI / 180.f))) * speed;
+		app->cameraZ -= (cosf(app->cameraAngleH * (PI / 180.f)) - sinf(app->cameraAngleH * (PI / 180.f))) * speed;
 		break;
-	case 'z': 
-		app->cameraX += (cosf(app->cameraAngleH * (PI / 180.f)) + sinf(app->cameraAngleH * (PI / 180.f))) * 0.3f;
-		app->cameraZ += (cosf(app->cameraAngleH * (PI / 180.f)) - sinf(app->cameraAngleH * (PI / 180.f))) * 0.3f;
+	case 'z':
+		app->cameraX += (cosf(app->cameraAngleH * (PI / 180.f)) + sinf(app->cameraAngleH * (PI / 180.f))) * speed;
+		app->cameraZ += (cosf(app->cameraAngleH * (PI / 180.f)) - sinf(app->cameraAngleH * (PI / 180.f))) * speed;
 		break;
 	case 'q':
-		app->cameraX += (cosf((app->cameraAngleH+90) * (PI / 180.f)) + sinf((app->cameraAngleH+90) * (PI / 180.f))) * 0.3f;
-		app->cameraZ += (cosf((app->cameraAngleH+90) * (PI / 180.f)) - sinf((app->cameraAngleH+90) * (PI / 180.f))) * 0.3f;
+		app->cameraX += (cosf((app->cameraAngleH + 90) * (PI / 180.f)) + sinf((app->cameraAngleH + 90) * (PI / 180.f))) * speed;
+		app->cameraZ += (cosf((app->cameraAngleH + 90) * (PI / 180.f)) - sinf((app->cameraAngleH + 90) * (PI / 180.f))) * speed;
 		break;
 	case 'd':
-		app->cameraX += (cosf((app->cameraAngleH - 90) * (PI / 180.f)) + sinf((app->cameraAngleH - 90) * (PI / 180.f))) * 0.3f;
-		app->cameraZ += (cosf((app->cameraAngleH - 90) * (PI / 180.f)) - sinf((app->cameraAngleH - 90) * (PI / 180.f))) * 0.3f;
+		app->cameraX += (cosf((app->cameraAngleH - 90) * (PI / 180.f)) + sinf((app->cameraAngleH - 90) * (PI / 180.f))) * speed;
+		app->cameraZ += (cosf((app->cameraAngleH - 90) * (PI / 180.f)) - sinf((app->cameraAngleH - 90) * (PI / 180.f))) * speed;
 		break;
 	case 'i':
 		app->cameraAngleV++;
@@ -60,6 +61,7 @@ void keyboard(unsigned char key, int x, int y) {
 	case 'k':
 		app->cameraAngleV--;
 	}
+	app->isCameraSpeeding = false;
 }
 
 //Handles Camera Positionning.
@@ -71,8 +73,11 @@ void keyboard2(int key, int x, int y)
 	case 101: app->cameraY += 0.1f; break;
 	case 102: app->cameraX += 0.1f; break;
 	case 103: app->cameraY -= 0.1f; break;
+	case 'p': app->isCameraSpeeding = true; break;
 	}
 }
+
+
 
 //Main function.
 int main(int argc, char* argv[])
@@ -90,7 +95,7 @@ int main(int argc, char* argv[])
 	glutSpecialFunc(keyboard2);
 	glutTimerFunc(25, update, 0);
 	glEnable(GL_TEXTURE_2D);
-	app->LoadTexture();
+	app->tex = app->LoadTexture();
 	glutMainLoop();
 	return 0;
 }
@@ -98,34 +103,41 @@ int main(int argc, char* argv[])
 //Displays stuff
 void display() {
 
+	glBindTexture(GL_TEXTURE_2D, 0);
 	//Clears everything
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glEnable(GL_DEPTH_TEST);
 	glEnable(GL_TEXTURE_2D);
+	//glEnable(GL_LIGHTING);
+	glEnable(GL_LIGHT0);
 	glDepthFunc(GL_LESS);
-	glClearColor(0, 0, 0, 1);
+	glClearColor(1, 0.2, 0.5f, 1);
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 	//Checks what rendering method to use. Both functions uses dynamically changing values (screen height and width) to avoid the scene being
 	//distored when the window is resized.
 	if (!app->orthoRendering)
+	{
 		gluPerspective(60, (float)glutGet(GLUT_WINDOW_WIDTH) / (float)glutGet(GLUT_WINDOW_HEIGHT), 0.001f, 1000);
+		
+	}
 	else
 		glOrtho(-(float)glutGet(GLUT_WINDOW_WIDTH) / WIN_WIDTH * 3.f - app->cameraX, //TODO: Remove 1024 and 576 and simply put the original height and width.
 			(float)glutGet(GLUT_WINDOW_WIDTH) / WIN_WIDTH * 3.f - app->cameraX,
 			-(float)glutGet(GLUT_WINDOW_HEIGHT) / WIN_HEIGHT * 3.f - app->cameraY,
 			(float)glutGet(GLUT_WINDOW_HEIGHT) / WIN_HEIGHT * 3.f - app->cameraY,
 			0.001f, 1000);
-
-	if (!app->orthoRendering)
-		gluLookAt(app->cameraX, app->cameraY, app->cameraZ, //Position of the camera
-			app->cameraX + cosf(app->cameraAngleH * (PI / 180.f)) + sinf(app->cameraAngleH * (PI / 180.f)), //Looking at X
-			app->cameraY + cosf(app->cameraAngleV * (PI / 180.f)) + sinf(app->cameraAngleV * (PI / 180.f)), //Looking at Y
-			app->cameraZ + cosf(app->cameraAngleH * (PI / 180.f)) - sinf(app->cameraAngleH * (PI / 180.f)), //Looking at Z
-			0, 1, 0);
-
-
-
+	gluLookAt(app->cameraX, app->cameraY, app->cameraZ, //Position of the camera
+		app->cameraX + cosf(app->cameraAngleH * (PI / 180.f)) + sinf(app->cameraAngleH * (PI / 180.f)), //Looking at X
+		app->cameraY, //Looking at Y
+		app->cameraZ + cosf(app->cameraAngleH * (PI / 180.f)) - sinf(app->cameraAngleH * (PI / 180.f)), //Looking at Z
+		0, 1, 0);
+	GLfloat params1[3] = { 1, 1, 1 };
+	GLfloat params2 = 128;
+	GLfloat params3 = 0;
+	glLightfv(GL_LIGHT0, GL_DIFFUSE,				params1);
+	glLightfv(GL_LIGHT0, GL_SPOT_EXPONENT,			&params2);
+	glLightfv(GL_LIGHT0, GL_CONSTANT_ATTENUATION,	&params3);
 	//Gizmo
 	glPushMatrix();
 	glTranslatef(0, 0, -6.f);
@@ -160,10 +172,12 @@ void display() {
 
 	//Quad
 	//2D Shapes aren't rotating for visual clarity reasons.
+	glBindTexture(GL_TEXTURE_2D, app->tex);
 	glPushMatrix();
 	glTranslatef(0.0, 2.0, -7.f);
 	draw::drawQuad(0.5f); //Actual Quad Drawing
 	glPopMatrix();
+	glBindTexture(GL_TEXTURE_2D, 0);
 
 	//Triangle
 	//2D Shapes aren't rotating for visual clarity reasons.
@@ -178,7 +192,8 @@ void display() {
 	glRotatef(app->angle, 1.0, 0.0f, 1.0f);
 	draw::drawPointSphere(50, 50); //Actual Point Sphere Drawing
 	glPopMatrix();
-	draw::drawMaze();
+
+	draw::drawMaze(app->tex);
 
 	glFlush();
 }

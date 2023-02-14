@@ -3,6 +3,9 @@
 typedef struct float3 {
 	float x, y, z;
 };
+typedef struct float2 {
+	float x, y;
+};
 
 // Draw triangle with vertices at (-0.5, -0.5), (0.5, -0.5), (0.0, 0.5)
 void draw::drawTriangle()
@@ -200,7 +203,7 @@ void draw::drawGizmo()
 }
 
 // Draw quad centered (halfSize = 0.5)
-/*void drawQuadNotTextured(float3 inPos, float3 endPos, float3 color)
+/*void drawQuad3D(float3 inPos, float3 endPos, float3 color)
 {
 
 	glBegin(GL_QUADS);
@@ -214,7 +217,16 @@ void draw::drawGizmo()
 	glVertex3f(endPos.x, endPos.y, inPos.z);
 	glEnd();
 }*/
-void drawQuadNotTextured(float3 inPos, float3 endPos, float3 color)
+
+void textureOrColor(float3 color, float2 texture, bool isTexture)
+{
+	if (isTexture)
+		glTexCoord2f(texture.x, texture.y);
+	else
+		glColor3f(color.x, color.y, color.z);
+}
+
+void drawQuad3D(float3 inPos, float3 endPos, float3 color, GLuint tex, bool isTexture = true)
 {
 	float3 vertices[] = {
 		{inPos.x, inPos.y, inPos.z},
@@ -230,58 +242,73 @@ void drawQuadNotTextured(float3 inPos, float3 endPos, float3 color)
 		{255, color.y, color.z},
 	};
 
+	
+
+	if (endPos.y - inPos.y == 0)
+		glNormal3f(0, 1, 0);
+	else if (endPos.x - inPos.x == 0)
+		glNormal3f(1, 0, 0);
+	else if (endPos.z - inPos.z == 0)
+		glNormal3f(0, 0, 1);
+
+
+	if (isTexture)
+		glBindTexture(GL_TEXTURE_2D, tex);
 	glBegin(GL_QUADS);
 	/*for (int i = 0; i < 4; i++)
 	{
 		glColor3f(colors[i].x, colors[i].y, colors[i].z);
 		glVertex3f(vertices[i].x, vertices[i].y, vertices[i].z);
 	}*/
-	glColor3f(colors[0].x, colors[0].y, colors[0].z);
-	glVertex3f(inPos.x, inPos.y, endPos.z);
-	if (endPos.x - inPos.x == 0)
-	{
-		glColor3f(colors[1].x, colors[1].y, colors[1].z);
-		glVertex3f(endPos.x, inPos.y, inPos.z);
-		glColor3f(colors[2].x, colors[2].y, colors[2].z);
-		glVertex3f(endPos.x, endPos.y, inPos.z);
-		glColor3f(colors[3].x, colors[3].y, colors[3].z);
-		glVertex3f(inPos.x, endPos.y, endPos.z);
-	}
-	else
-	{
-		glColor3f(colors[1].x, colors[1].y, colors[1].z);
-		glVertex3f(endPos.x, inPos.y, endPos.z);
-		glColor3f(colors[2].x, colors[2].y, colors[2].z);
-		glVertex3f(endPos.x, endPos.y, inPos.z);
-		glColor3f(colors[3].x, colors[3].y, colors[3].z);
+		glColor3f(1, 0, 1);
+		textureOrColor(colors[0], { 0,0 }, isTexture);
+		glVertex3f(inPos.x, inPos.y, endPos.z);
+		if (endPos.x - inPos.x == 0)
+		{
+			textureOrColor(colors[1], { 1,0 }, isTexture);
+			glVertex3f(endPos.x, inPos.y, inPos.z);
+			textureOrColor(colors[2], { 1,1 }, isTexture);
+			glVertex3f(endPos.x, endPos.y, inPos.z);
+			textureOrColor(colors[3], { 0,1 }, isTexture);
+			glVertex3f(inPos.x, endPos.y, endPos.z);
+		}
+		else
+		{
+			textureOrColor(colors[1], { 1,0 }, isTexture);
+			glVertex3f(endPos.x, inPos.y, endPos.z);
+			textureOrColor(colors[2], { 1,1 }, isTexture);
+			glVertex3f(endPos.x, endPos.y, inPos.z);
+			textureOrColor(colors[3], { 0,1 }, isTexture);
 		glVertex3f(inPos.x, endPos.y, inPos.z);
-	}
+		}
 	glEnd();
+	if (isTexture)
+		glBindTexture(GL_TEXTURE_2D, 0);
 }
 
 //Draw Maze
-void draw::drawMaze()
+void draw::drawMaze(GLuint tex)
 {
 	//Floor
-	drawQuadNotTextured({ 0,-1,0 }, { 5,-1,5 }, { 1,0,0 });
+	drawQuad3D({ 0,-1,0 }, { 5,-1,5 }, { 1,0,0 }, tex);
 
 	//Walls
-	drawQuadNotTextured({ 0,-1,0 }, { 2 , 0 , 0 }, { 0,1,0 });
-	drawQuadNotTextured({ 3,-1,0 }, { 5 , 0 , 0 }, { 0,1,0 });
-	drawQuadNotTextured({ 0,-1,0 }, { 0 , 0 , 5 }, { 0,1,0 });
-	drawQuadNotTextured({ 5,-1,0 }, { 5 , 0 , 5 }, { 0,1,0 });
-	drawQuadNotTextured({ 0,-1,5 }, { 2 , 0 , 5 }, { 0,1,0 });
-	drawQuadNotTextured({ 3,-1,5 }, { 5 , 0 , 5 }, { 0,1,0 });
-	drawQuadNotTextured({ 0,-1,4 }, { 1 , 0 , 4 }, { 0,1,0 });
-	drawQuadNotTextured({ 0,-1,2 }, { 1 , 0 , 2 }, { 0,1,0 });
-	drawQuadNotTextured({ 1,-1,1 }, { 2 , 0 , 1 }, { 0,1,0 });
-	drawQuadNotTextured({ 2,-1,2 }, { 4 , 0 , 2 }, { 0,1,0 });
-	drawQuadNotTextured({ 2,-1,4 }, { 4 , 0 , 4 }, { 0,1,0 });
-	drawQuadNotTextured({ 1,-1,3 }, { 3 , 0 , 3 }, { 0,1,0 });
-	drawQuadNotTextured({ 4,-1,1 }, { 5 , 0 , 1 }, { 0,1,0 });
-	drawQuadNotTextured({ 2,-1,5 }, { 2 , 0 , 4 }, { 0,1,0 });
-	drawQuadNotTextured({ 2,-1,3 }, { 2 , 0 , 2 }, { 0,1,0 });
-	drawQuadNotTextured({ 1,-1,2 }, { 1 , 0 , 1 }, { 0,1,0 });
-	drawQuadNotTextured({ 3,-1,1 }, { 3 , 0 , 2 }, { 0,1,0 });
-	drawQuadNotTextured({ 4,-1,2 }, { 4 , 0 , 4 }, { 0,1,0 });
+	drawQuad3D({ 0,-1,0 }, { 2 , 0 , 0 }, { 0,1,0 }, tex);	
+	drawQuad3D({ 3,-1,0 }, { 5 , 0 , 0 }, { 0,1,0 }, tex);
+	drawQuad3D({ 0,-1,0 }, { 0 , 0 , 5 }, { 0,1,0 }, tex);
+	drawQuad3D({ 5,-1,0 }, { 5 , 0 , 5 }, { 0,1,0 }, tex);
+	drawQuad3D({ 0,-1,5 }, { 2 , 0 , 5 }, { 0,1,0 }, tex);
+	drawQuad3D({ 3,-1,5 }, { 5 , 0 , 5 }, { 0,1,0 }, tex);
+	drawQuad3D({ 0,-1,4 }, { 1 , 0 , 4 }, { 0,1,0 }, tex);
+	drawQuad3D({ 0,-1,2 }, { 1 , 0 , 2 }, { 0,1,0 }, tex);
+	drawQuad3D({ 1,-1,1 }, { 2 , 0 , 1 }, { 0,1,0 }, tex);
+	drawQuad3D({ 2,-1,2 }, { 4 , 0 , 2 }, { 0,1,0 }, tex);
+	drawQuad3D({ 2,-1,4 }, { 4 , 0 , 4 }, { 0,1,0 }, tex);
+	drawQuad3D({ 1,-1,3 }, { 3 , 0 , 3 }, { 0,1,0 }, tex);
+	drawQuad3D({ 4,-1,1 }, { 5 , 0 , 1 }, { 0,1,0 }, tex);
+	drawQuad3D({ 2,-1,5 }, { 2 , 0 , 4 }, { 0,1,0 }, tex);
+	drawQuad3D({ 2,-1,3 }, { 2 , 0 , 2 }, { 0,1,0 }, tex);
+	drawQuad3D({ 1,-1,2 }, { 1 , 0 , 1 }, { 0,1,0 }, tex);
+	drawQuad3D({ 3,-1,1 }, { 3 , 0 , 2 }, { 0,1,0 }, tex);
+	drawQuad3D({ 4,-1,2 }, { 4 , 0 , 4 }, { 0,1,0 }, tex);
 }

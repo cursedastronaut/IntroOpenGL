@@ -1,5 +1,6 @@
 #pragma once
 #include "freeglut/GL/freeglut.h"
+#include "app.h"
 #define PI 3.141592f
 namespace draw
 {
@@ -27,6 +28,6 @@ namespace draw
     void drawGizmo();
 
     //Draw Maze
-    void drawMaze();
+    void drawMaze(GLuint tex);
 };
 

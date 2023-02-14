@@ -39,13 +39,13 @@ void decimalToBinary(int decimal, char* binary) {
     }
 }
 
-void App::LoadTexture()
+GLuint App::LoadTexture()
 {
-    std::ifstream texture("binary.pbm", std::ifstream::in);
+    std::ifstream texture("binary.pbm", std::ios::binary);
     if (!texture.is_open())
     {
         std::cout << "Error! Couldn't open file." << std::endl;
-        return;
+        return 0;
     }
         
     int type = 0;
@@ -54,7 +54,7 @@ void App::LoadTexture()
     if (texture.get() != 'P')
     {
         std::cout << "Error! File Kim.temp doesn't start with P!" << std::endl; 
-        return;
+        return 0;
     }
     
     //Find the type of texture
@@ -77,27 +77,49 @@ void App::LoadTexture()
     
     if (type == 4)
     {
+       
         width = texture.get() - '0';
         texture.get();
         height = texture.get() - '0';
         texture.get();
         char* data = new char[width * height];
         char* data_ = data;
-
-        while (!texture.eof())
+        #if n
+        for  (int i = 0; !texture.eof() && i < width + height; )
         {
             char hex = texture.get();
 
             if (hex == EOF)
                 break;
             printf("%x\n", hex);
+            printf("%d\n", i);
             for (int j = 7; j >= width; j--)
             {
                 *data_++ = hex & (1 << j) ? 0 : 0xFF;
+                i++;
+                if (i >= width * height)
+                    break;
+            }
+            printf("%d\n", i);
+        }
+        #endif
+
+        for (int y = 0; y < height; y++)
+        {
+            char hex = texture.get();
+            printf("%x\n", hex);
+            for (int x = 7; x >= width; --x)
+            {
+                if (hex == EOF)
+                    break;
+                unsigned char test = hex & (1 << x) ? 0x00 : 0xFF;
+                *data_ = test;
+                printf("d:%u\n", (unsigned int)*data_);
+                data_++;
             }
         }
 
-        printf("%x", data_ - data);
+        printf("Diff: %x\n", data_ - data);
 
         std::cout << std::endl;
         std::cout << std::endl;
@@ -115,5 +137,7 @@ void App::LoadTexture()
         texture.close();
 
         delete[] data;
+
+        return texture_map;
     }
 }

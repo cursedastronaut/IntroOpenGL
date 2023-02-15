@@ -11,5 +11,5 @@ class App
 		GLuint tex[];
 
 		//Loads the textures
-		GLuint LoadTexture(const char* filename, GLuint width = 0, GLuint height = 0);
+		GLuint LoadTexture(const char* filename, GLuint width = 0, GLuint height = 0, bool isAlpha = false);
 };

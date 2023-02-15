@@ -2,6 +2,12 @@
 #include "GL/freeglut.h"
 #include "app.h"
 #define PI 3.141592f
+typedef struct float3 {
+    float x, y, z;
+};
+typedef struct float2 {
+    float x, y;
+};
 namespace draw
 {
     
@@ -29,5 +35,7 @@ namespace draw
 
     //Draw Maze
     void drawMaze(GLuint tex);
+
+    void drawQuad3D(float3 inPos, float3 endPos, float3 color, GLuint tex, bool isTexture = true);
 };
 

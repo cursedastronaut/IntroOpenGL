@@ -45,6 +45,7 @@ int main(int argc, char* argv[])
 	glEnable(GL_TEXTURE_2D);
 	app->tex[0] = app->LoadTexture("binary.pbm");
 	app->tex[1] = app->LoadTexture("marwan.bmp", 504, 504);
+	app->tex[2] = app->LoadTexture("gun2.bmp", 504, 504, false);
 
 	IMGUI_CHECKVERSION();
 	ImGui::CreateContext();
@@ -80,11 +81,9 @@ void display() {
 	GLfloat  diffuseLight[] = { 0.7f, 0.7f, 0.7f, 1.0f };
 	GLfloat  specular[] = { 0.2f, 0.2f, 0.2f, 1.0f };
 	GLfloat  specref[] = { 1.0f, 1.0f, 1.0f, 1.0f };
+	GLfloat  position[] = { 0.0f, 1.0f, -5.0f, 1.0f };
 	GLfloat  shininess = 1;
-	glLightfv(GL_LIGHT1, GL_AMBIENT, ambientLight);
-	glLightfv(GL_LIGHT1, GL_DIFFUSE, diffuseLight);
-	glLightfv(GL_LIGHT1, GL_SPECULAR, specular);
-	glEnable(GL_LIGHT1);
+	
 	
 	
 	glMatrixMode(GL_PROJECTION);
@@ -100,8 +99,16 @@ void display() {
 	glMateriali(GL_FRONT, GL_SHININESS, shininess);
 
 	glMatrixMode(GL_MODELVIEW);
-	//Gizmo
 	glLoadIdentity();
+	cam->LookAt();
+	glLightfv(GL_LIGHT1, GL_AMBIENT, ambientLight);
+	glLightfv(GL_LIGHT1, GL_DIFFUSE, diffuseLight);
+	glLightfv(GL_LIGHT1, GL_SPECULAR, specular);
+	glLightfv(GL_LIGHT1, GL_POSITION, position);
+	glEnable(GL_LIGHT1);
+
+
+	//Gizmo
 	glPushMatrix();
 	glTranslatef(0, 0, -6.f);
 	draw::drawGizmo();
@@ -154,10 +161,19 @@ void display() {
 	glPopMatrix();
 
 	glColorMaterial(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE);
+	glMaterialfv(GL_FRONT, GL_SPECULAR, specref);
+	glMateriali(GL_FRONT, GL_SHININESS, shininess);
 	draw::drawMaze(app->tex[0]);
 
-
-
+	glLoadIdentity();
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+	glDisable(GL_LIGHT1);
+	glDisable(GL_LIGHTING);
+	glDisable(GL_COLOR_MATERIAL);
+	draw::drawQuad3D({-0.2f, -1.0f - cam->offset - 0.2f, 0},
+		{ 0.2f, -0.4f - cam->offset - 0.2f, 0 }, {1,1,1}, app->tex[2], true);
+	
 	ImGui_ImplGLUT_NewFrame();
 	ImGui_ImplOpenGL2_NewFrame();
 	ImGui::Begin("Debug Informations");

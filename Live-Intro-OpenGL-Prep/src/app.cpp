@@ -4,43 +4,9 @@
 #include <cwchar>
 #include <fstream>
 #include <iostream>
-enum textype {
-    binary,
-    ascii
-};
-
-/*void decimalToBinary(int n, char* binary) {
-    long long decimal = 0;
-    int last, i = 1;
-    while (n != 0) {
-        last = n % 2;
-        decimal += last * i;
-        i = i * 10;
-        n = n / 2;
-    }
-    std::cout << decimal << std::endl;
-    sprintf_s(binary, sizeof(int) * 4 * 8, "%d", decimal);
-    std::cout << binary[0] << std::endl;
-}*/
-
-void decimalToBinary(int decimal, char* binary) {
-    int index = 0;
-    while (decimal > 0) {
-        binary[index++] = (decimal % 2 == 0) ? '0' : '1';
-        decimal /= 2;
-    }
-
-    // Reverse the binary string
-    int start = 0, end = index - 1;
-    while (start < end) {
-        char temp = binary[start];
-        binary[start++] = binary[end];
-        binary[end--] = temp;
-    }
-}
 
 //Loads the textures
-GLuint App::LoadTexture(const char* filename, GLuint width, GLuint height)
+GLuint App::LoadTexture(const char* filename, GLuint width, GLuint height, bool isAlpha)
 {
     //Opening file in binary
     std::ifstream texture(filename, std::ios::binary);
@@ -151,20 +117,27 @@ GLuint App::LoadTexture(const char* filename, GLuint width, GLuint height)
         std::ifstream texture(filename, std::ios::binary);
         GLuint texmap;
         char* data;
+        int colorChannels = 3;
+        if (isAlpha)
+        {
+            colorChannels = 4;
+        }
         //Since the whole data is already almost good, I just send everything to the data buffer
-        data = (char*)malloc(width * height * 3);
-        texture.read(data, width * height * 3);
+        data = (char*)malloc(width * height * colorChannels);
+        texture.read(data, width * height * colorChannels);
         texture.close();
+
+        
 
         //This part wouldn't exist if BMP switched red and blue.
         //This parts simply switch back red and blue to follow the RGB format.
         for (int i = 0; i < width * height; ++i)
         {
             unsigned char blue, red;
-            blue = data[i * 3];
-            red = data[i * 3 + 2];
-            data[i * 3] = red;
-            data[i * 3 + 2] = blue;
+            blue = data[i * colorChannels];
+            red = data[i * colorChannels + 2];
+            data[i * colorChannels] = red;
+            data[i * colorChannels + 2] = blue;
         }
 
         glGenTextures(1, &texmap);

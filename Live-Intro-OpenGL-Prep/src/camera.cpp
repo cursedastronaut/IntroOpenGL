@@ -7,9 +7,10 @@ void Camera::Input()
 {
 	//ImGui::GetIO().AddKeyEvent();
 	float speed = 0.01f;
-	//if (ImGui::IsKeyDown(ImGuiKey_LeftShift))
-	//	speed *= 10;
-
+	if (ImGui::IsKeyDown(ImGuiKey_LeftShift))
+		speed *= 10;
+	
+	bool hasMoved = false;
 	if (ImGui::IsKeyDown(ImGuiKey_P)) { orthoRendering = false; }
 	if (ImGui::IsKeyDown(ImGuiKey_O)) { orthoRendering = true; }
 	if (ImGui::IsKeyDown(ImGuiKey_N)) { angle++; }
@@ -21,27 +22,38 @@ void Camera::Input()
 	{
 		pos.x -= (std::cos(angle * (M_PI / 180.f)) + sinf(angle * (M_PI / 180.f))) * speed;
 		pos.z -= (std::cos(angle * (M_PI / 180.f)) - sinf(angle * (M_PI / 180.f))) * speed;
+		hasMoved = true;
 	}
 	if (ImGui::IsKeyDown(ImGuiKey_Z))
 	{
 		pos.x += (std::cos(angle * (M_PI / 180.f)) + sinf(angle * (M_PI / 180.f))) * speed;
 		pos.z += (std::cos(angle * (M_PI / 180.f)) - sinf(angle * (M_PI / 180.f))) * speed;
+		hasMoved = true;
 	}
 	if (ImGui::IsKeyDown(ImGuiKey_Q))
 	{
 		pos.x += (std::cos((angle + 90) * (M_PI / 180.f)) + sinf((angle + 90) * (M_PI / 180.f))) * speed;
 		pos.z += (std::cos((angle + 90) * (M_PI / 180.f)) - sinf((angle + 90) * (M_PI / 180.f))) * speed;
+		hasMoved = true;
 	}
 	if (ImGui::IsKeyDown(ImGuiKey_D))
 	{
 		pos.x += (std::cos((angle - 90) * (M_PI / 180.f)) + sinf((angle - 90) * (M_PI / 180.f))) * speed;
 		pos.z += (std::cos((angle - 90) * (M_PI / 180.f)) - sinf((angle - 90) * (M_PI / 180.f))) * speed;
+		hasMoved = true;
 	}
 
 	if (ImGui::IsKeyDown(ImGuiKey_LeftArrow))	{ pos.x -= 0.1f; }
 	if (ImGui::IsKeyDown(ImGuiKey_UpArrow))		{ pos.y += 0.1f; }
 	if (ImGui::IsKeyDown(ImGuiKey_RightArrow))	{ pos.x += 0.1f; }
 	if (ImGui::IsKeyDown(ImGuiKey_DownArrow))	{ pos.y -= 0.1f; }
+	
+	if (hasMoved == true)
+	{
+		offsetI += 0.1f; 
+		if (offsetI >= 360) offsetI = 0;
+		offset = std::cos(offsetI) * 0.1f;
+	}
 }
 
 void Camera::Update()
@@ -59,9 +71,16 @@ void Camera::Update()
 			 0.001f, 1000);
 
 
-	gluLookAt(pos.x, pos.y, pos.z, //Position of the camera
-		pos.x + std::cos(angle * (M_PI / 180.f)) + sinf(angle * (M_PI / 180.f)), //Looking at X
-		pos.y, //Looking at Y
-		pos.z + std::cos(angle * (M_PI / 180.f)) - sinf(angle * (M_PI / 180.f)), //Looking at Z
-		0, 1, 0); 
+
+}
+
+void Camera::LookAt()
+{
+	lookAtpos.x = pos.x + std::cos(angle * (M_PI / 180.f)) + sinf(angle * (M_PI / 180.f)); //Looking at X
+	lookAtpos.y = pos.y + offset; //Looking at Y
+	lookAtpos.z = pos.z + std::cos(angle * (M_PI / 180.f)) - sinf(angle * (M_PI / 180.f)); //Looking at Z
+
+	gluLookAt(pos.x, pos.y+offset, pos.z, //Position of the camera
+		lookAtpos.x, lookAtpos.y, lookAtpos.z, 
+		0, 1, 0);
 }

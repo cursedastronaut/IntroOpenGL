@@ -1,11 +1,6 @@
 #include "draw.h"
 #include <math.h>
-typedef struct float3 {
-	float x, y, z;
-};
-typedef struct float2 {
-	float x, y;
-};
+
 
 void vertexAndNormal(GLfloat x, GLfloat y, GLfloat z)
 {
@@ -201,7 +196,7 @@ void textureOrColor(float3 color, float2 texture, bool isTexture)
 
 
 
-void drawQuad3D(float3 inPos, float3 endPos, float3 color, GLuint tex, bool isTexture = true)
+void draw::drawQuad3D(float3 inPos, float3 endPos, float3 color, GLuint tex, bool isTexture)
 {
 	float3 colors[] = {
 		{color.x, color.y, color.z},
@@ -240,7 +235,7 @@ void drawQuad3D(float3 inPos, float3 endPos, float3 color, GLuint tex, bool isTe
 			textureOrColor(colors[2], { 1,1 }, isTexture);
 			glVertex3f(endPos.x, endPos.y, inPos.z);
 			textureOrColor(colors[3], { 0,1 }, isTexture);
-		glVertex3f(inPos.x, endPos.y, inPos.z);
+			glVertex3f(inPos.x, endPos.y, inPos.z);
 		}
 	glEnd();
 	if (isTexture)
@@ -250,17 +245,17 @@ void drawQuad3D(float3 inPos, float3 endPos, float3 color, GLuint tex, bool isTe
 void drawCubeNoRes(float3 inPos, float3 endPos, float3 color, GLuint tex, bool isTexture = true)
 {
 	//Face
-	drawQuad3D(inPos, { endPos.x, endPos.y, inPos.z }, color, tex, isTexture);
+	draw::drawQuad3D(inPos, { endPos.x, endPos.y, inPos.z }, color, tex, isTexture);
 	//Floor
-	drawQuad3D(inPos, { endPos.x, inPos.y, endPos.z }, color, tex, isTexture);
+	draw::drawQuad3D(inPos, { endPos.x, inPos.y, endPos.z }, color, tex, isTexture);
 	//Back
-	drawQuad3D(endPos, { inPos.x, inPos.y, endPos.z }, color, tex, isTexture);
+	draw::drawQuad3D(endPos, { inPos.x, inPos.y, endPos.z }, color, tex, isTexture);
 	//Roof
-	drawQuad3D({inPos.x, endPos.y, inPos.z}, { endPos.x, endPos.y, endPos.z }, color, tex, isTexture);
+	draw::drawQuad3D({inPos.x, endPos.y, inPos.z}, { endPos.x, endPos.y, endPos.z }, color, tex, isTexture);
 	//Wall 1
-	drawQuad3D(inPos, {inPos.x, endPos.y, endPos.z}, color, tex, isTexture);
+	draw::drawQuad3D(inPos, {inPos.x, endPos.y, endPos.z}, color, tex, isTexture);
 	//Wall 2
-	drawQuad3D({endPos.x, inPos.y, inPos.z}, { endPos.x, endPos.y, endPos.z }, color, tex, isTexture);
+	draw::drawQuad3D({endPos.x, inPos.y, inPos.z}, { endPos.x, endPos.y, endPos.z }, color, tex, isTexture);
 
 
 }

@@ -1,5 +1,5 @@
 #pragma once
-#include "freeglut/GL/freeglut.h"
+#include "GL/freeglut.h"
 #include "app.h"
 #define PI 3.141592f
 namespace draw

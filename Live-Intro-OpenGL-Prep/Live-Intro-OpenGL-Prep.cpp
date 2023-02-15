@@ -2,13 +2,18 @@
 //
 
 #include <iostream>
+#include <imgui/imgui.h>
+#include <imgui/imgui_impl_glut.h>
+#include <imgui/imgui_impl_opengl2.h>
 #include "src/app.h"
-#define WIN_HEIGHT 576
-#define WIN_WIDTH 1024
+#include "src/camera.h"
+
 
 
 //Global creation of the class App.
 App* app = new App();
+//Global creation of the class Camera.
+Camera* cam = new Camera();
 
 //Telling main() that display() exists despite being declared after.
 void display();
@@ -19,65 +24,10 @@ void update(int value) {
 	if (app->angle > 360)
 		app->angle -= 360.f;
 
-	if (app->cameraAngleH == 0)
-		app->cameraAngleH = 360.f;
-	else if (app->cameraAngleH > 360.f)
-		app->cameraAngleH -= 360.f;
+	cam->Update();
 	glutPostRedisplay();
 	glutTimerFunc(25, update, 0);
 }
-
-//Handles rendering mode switching, and the Camera Angle.
-void keyboard(unsigned char key, int x, int y) {
-	float speed = 0.10f;
-	if (app->isCameraSpeeding)
-		speed = 0.1f;
-	switch (key)
-	{
-	case 56: app->orthoRendering = false; break;
-	case 57: app->orthoRendering = true; break;
-	case 110: app->cameraAngleH++; break;
-	case 109: app->cameraAngleH--; break;
-
-	case 's': 
-		app->cameraX -= (cosf(app->cameraAngleH * (PI / 180.f)) + sinf(app->cameraAngleH * (PI / 180.f))) * speed;
-		app->cameraZ -= (cosf(app->cameraAngleH * (PI / 180.f)) - sinf(app->cameraAngleH * (PI / 180.f))) * speed;
-		break;
-	case 'z':
-		app->cameraX += (cosf(app->cameraAngleH * (PI / 180.f)) + sinf(app->cameraAngleH * (PI / 180.f))) * speed;
-		app->cameraZ += (cosf(app->cameraAngleH * (PI / 180.f)) - sinf(app->cameraAngleH * (PI / 180.f))) * speed;
-		break;
-	case 'q':
-		app->cameraX += (cosf((app->cameraAngleH + 90) * (PI / 180.f)) + sinf((app->cameraAngleH + 90) * (PI / 180.f))) * speed;
-		app->cameraZ += (cosf((app->cameraAngleH + 90) * (PI / 180.f)) - sinf((app->cameraAngleH + 90) * (PI / 180.f))) * speed;
-		break;
-	case 'd':
-		app->cameraX += (cosf((app->cameraAngleH - 90) * (PI / 180.f)) + sinf((app->cameraAngleH - 90) * (PI / 180.f))) * speed;
-		app->cameraZ += (cosf((app->cameraAngleH - 90) * (PI / 180.f)) - sinf((app->cameraAngleH - 90) * (PI / 180.f))) * speed;
-		break;
-	case 'i':
-		app->cameraAngleV++;
-
-	case 'k':
-		app->cameraAngleV--;
-	}
-	app->isCameraSpeeding = false;
-}
-
-//Handles Camera Positionning.
-void keyboard2(int key, int x, int y)
-{
-	switch (key)
-	{
-	case 100: app->cameraX -= 0.1f; break;
-	case 101: app->cameraY += 0.1f; break;
-	case 102: app->cameraX += 0.1f; break;
-	case 103: app->cameraY -= 0.1f; break;
-	case 'p': app->isCameraSpeeding = true; break;
-	}
-}
-
-
 
 //Main function.
 int main(int argc, char* argv[])
@@ -91,13 +41,26 @@ int main(int argc, char* argv[])
 
 
 	glutDisplayFunc(display);
-	glutKeyboardFunc(keyboard);
-	glutSpecialFunc(keyboard2);
 	glutTimerFunc(25, update, 0);
 	glEnable(GL_TEXTURE_2D);
 	app->tex[0] = app->LoadTexture("binary.pbm");
 	app->tex[1] = app->LoadTexture("marwan.bmp", 504, 504);
+
+	IMGUI_CHECKVERSION();
+	ImGui::CreateContext();
+
+	ImGui_ImplGLUT_Init();
+	ImGui_ImplGLUT_InstallFuncs();
+	ImGui_ImplOpenGL2_Init();
+	ImGuiIO& io = ImGui::GetIO();
+	io.Fonts->AddFontDefault();
+	io.Fonts->Build();
+	io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;
+	ImGui::StyleColorsDark();
+
 	glutMainLoop();
+	ImGui_ImplGLUT_Shutdown();
+	ImGui_ImplOpenGL2_Shutdown();
 	return 0;
 }
 
@@ -122,27 +85,16 @@ void display() {
 	glLightfv(GL_LIGHT1, GL_DIFFUSE, diffuseLight);
 	glLightfv(GL_LIGHT1, GL_SPECULAR, specular);
 	glEnable(GL_LIGHT1);
-
+	
+	
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
+	
+
+	
 	//Checks what rendering method to use. Both functions uses dynamically changing values (screen height and width) to avoid the scene being
 	//distored when the window is resized.
-	if (!app->orthoRendering)
-	{
-		gluPerspective(60, (float)glutGet(GLUT_WINDOW_WIDTH) / (float)glutGet(GLUT_WINDOW_HEIGHT), 0.001f, 1000);
-		
-	}
-	else
-		glOrtho(-(float)glutGet(GLUT_WINDOW_WIDTH) / WIN_WIDTH * 3.f - app->cameraX, //TODO: Remove 1024 and 576 and simply put the original height and width.
-			(float)glutGet(GLUT_WINDOW_WIDTH) / WIN_WIDTH * 3.f - app->cameraX,
-			-(float)glutGet(GLUT_WINDOW_HEIGHT) / WIN_HEIGHT * 3.f - app->cameraY,
-			(float)glutGet(GLUT_WINDOW_HEIGHT) / WIN_HEIGHT * 3.f - app->cameraY,
-			0.001f, 1000);
-	gluLookAt(app->cameraX, app->cameraY, app->cameraZ, //Position of the camera
-		app->cameraX + cosf(app->cameraAngleH * (PI / 180.f)) + sinf(app->cameraAngleH * (PI / 180.f)), //Looking at X
-		app->cameraY, //Looking at Y
-		app->cameraZ + cosf(app->cameraAngleH * (PI / 180.f)) - sinf(app->cameraAngleH * (PI / 180.f)), //Looking at Z
-		0, 1, 0);
+	cam->Update();
 
 	glMaterialfv(GL_FRONT, GL_SPECULAR, specref);
 	glMateriali(GL_FRONT, GL_SHININESS, shininess);
@@ -203,6 +155,16 @@ void display() {
 
 	glColorMaterial(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE);
 	draw::drawMaze(app->tex[0]);
+
+
+
+	ImGui_ImplGLUT_NewFrame();
+	ImGui_ImplOpenGL2_NewFrame();
+	ImGui::Begin("Debug Informations");
+	ImGui::End();
+	ImGui::Render();
+	ImGui_ImplOpenGL2_RenderDrawData(ImGui::GetDrawData());
+	ImGui::EndFrame();
 
 	glFlush();
 }

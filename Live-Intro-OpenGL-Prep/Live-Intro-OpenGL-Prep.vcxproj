@@ -145,12 +145,28 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="external\include\imgui\imgui.cpp" />
+    <ClCompile Include="external\include\imgui\imgui_demo.cpp" />
+    <ClCompile Include="external\include\imgui\imgui_draw.cpp" />
+    <ClCompile Include="external\include\imgui\imgui_impl_glut.cpp" />
+    <ClCompile Include="external\include\imgui\imgui_impl_opengl2.cpp" />
+    <ClCompile Include="external\include\imgui\imgui_tables.cpp" />
+    <ClCompile Include="external\include\imgui\imgui_widgets.cpp" />
     <ClCompile Include="Live-Intro-OpenGL-Prep.cpp" />
     <ClCompile Include="src\app.cpp" />
+    <ClCompile Include="src\camera.cpp" />
     <ClCompile Include="src\draw.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\..\..\Downloads\draw.h" />
+    <ClInclude Include="external\include\imgui\imconfig.h" />
+    <ClInclude Include="external\include\imgui\imgui.h" />
+    <ClInclude Include="external\include\imgui\imgui_impl_glut.h" />
+    <ClInclude Include="external\include\imgui\imgui_impl_opengl2.h" />
+    <ClInclude Include="external\include\imgui\imgui_internal.h" />
+    <ClInclude Include="external\include\imgui\imstb_rectpack.h" />
+    <ClInclude Include="external\include\imgui\imstb_textedit.h" />
+    <ClInclude Include="external\include\imgui\imstb_truetype.h" />
     <ClInclude Include="external\include\freeglut\GL\freeglut.h" />
     <ClInclude Include="external\include\freeglut\GL\freeglut_ext.h" />
     <ClInclude Include="external\include\freeglut\GL\freeglut_std.h" />
@@ -158,6 +174,7 @@
     <ClInclude Include="external\include\freeglut\GL\glut.h" />
     <ClInclude Include="src\draw.h" />
     <ClInclude Include="src\app.h" />
+    <ClInclude Include="src\camera.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

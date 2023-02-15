@@ -29,7 +29,7 @@ void update(int value) {
 
 //Handles rendering mode switching, and the Camera Angle.
 void keyboard(unsigned char key, int x, int y) {
-	float speed = 0.01f;
+	float speed = 0.10f;
 	if (app->isCameraSpeeding)
 		speed = 0.1f;
 	switch (key)
@@ -95,7 +95,8 @@ int main(int argc, char* argv[])
 	glutSpecialFunc(keyboard2);
 	glutTimerFunc(25, update, 0);
 	glEnable(GL_TEXTURE_2D);
-	app->tex = app->LoadTexture();
+	app->tex[0] = app->LoadTexture("binary.pbm");
+	app->tex[1] = app->LoadTexture("marwan.bmp", 504, 504);
 	glutMainLoop();
 	return 0;
 }
@@ -108,11 +109,21 @@ void display() {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glEnable(GL_DEPTH_TEST);
 	glEnable(GL_TEXTURE_2D);
-	//glEnable(GL_LIGHTING);
-	glEnable(GL_LIGHT0);
+	glEnable(GL_LIGHTING);
+	glEnable(GL_COLOR_MATERIAL);
 	glDepthFunc(GL_LESS);
 	glClearColor(1, 0.2, 0.5f, 1);
-	glMatrixMode(GL_MODELVIEW);
+	GLfloat  ambientLight[] = { 0.1f, 0.1f, 0.1f, 1.0f };
+	GLfloat  diffuseLight[] = { 0.7f, 0.7f, 0.7f, 1.0f };
+	GLfloat  specular[] = { 0.2f, 0.2f, 0.2f, 1.0f };
+	GLfloat  specref[] = { 1.0f, 1.0f, 1.0f, 1.0f };
+	GLfloat  shininess = 1;
+	glLightfv(GL_LIGHT1, GL_AMBIENT, ambientLight);
+	glLightfv(GL_LIGHT1, GL_DIFFUSE, diffuseLight);
+	glLightfv(GL_LIGHT1, GL_SPECULAR, specular);
+	glEnable(GL_LIGHT1);
+
+	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
 	//Checks what rendering method to use. Both functions uses dynamically changing values (screen height and width) to avoid the scene being
 	//distored when the window is resized.
@@ -132,20 +143,17 @@ void display() {
 		app->cameraY, //Looking at Y
 		app->cameraZ + cosf(app->cameraAngleH * (PI / 180.f)) - sinf(app->cameraAngleH * (PI / 180.f)), //Looking at Z
 		0, 1, 0);
-	GLfloat params1[3] = { 1, 1, 1 };
-	GLfloat params2 = 128;
-	GLfloat params3 = 0;
-	glLightfv(GL_LIGHT0, GL_DIFFUSE,				params1);
-	glLightfv(GL_LIGHT0, GL_SPOT_EXPONENT,			&params2);
-	glLightfv(GL_LIGHT0, GL_CONSTANT_ATTENUATION,	&params3);
+
+	glMaterialfv(GL_FRONT, GL_SPECULAR, specref);
+	glMateriali(GL_FRONT, GL_SHININESS, shininess);
+
+	glMatrixMode(GL_MODELVIEW);
 	//Gizmo
+	glLoadIdentity();
 	glPushMatrix();
 	glTranslatef(0, 0, -6.f);
-	// glRotatef(app->angle, 0.0, 1.0f, 0.f);
 	draw::drawGizmo();
 	glPopMatrix();
-
-
 
 	//Cone
 	glPushMatrix();
@@ -172,7 +180,7 @@ void display() {
 
 	//Quad
 	//2D Shapes aren't rotating for visual clarity reasons.
-	glBindTexture(GL_TEXTURE_2D, app->tex);
+	glBindTexture(GL_TEXTURE_2D, app->tex[1]);
 	glPushMatrix();
 	glTranslatef(0.0, 2.0, -7.f);
 	draw::drawQuad(0.5f); //Actual Quad Drawing
@@ -193,7 +201,8 @@ void display() {
 	draw::drawPointSphere(50, 50); //Actual Point Sphere Drawing
 	glPopMatrix();
 
-	draw::drawMaze(app->tex);
+	glColorMaterial(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE);
+	draw::drawMaze(app->tex[0]);
 
 	glFlush();
 }

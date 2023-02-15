@@ -39,21 +39,25 @@ void decimalToBinary(int decimal, char* binary) {
     }
 }
 
-GLuint App::LoadTexture()
+//Loads the textures
+GLuint App::LoadTexture(const char* filename, GLuint width, GLuint height)
 {
-    std::ifstream texture("binary.pbm", std::ios::binary);
+    //Opening file in binary
+    std::ifstream texture(filename, std::ios::binary);
+    //Checking if it worked
     if (!texture.is_open())
     {
         std::cout << "Error! Couldn't open file." << std::endl;
         return 0;
     }
-        
+    
     int type = 0;
     GLint format = GL_RGB;
-    GLint width, height = { 0 };
-    if (texture.get() != 'P')
+    char c = texture.get();
+    //Check if file is neither PBM or BMP
+    if (c != 'P' && c != 'B')
     {
-        std::cout << "Error! File Kim.temp doesn't start with P!" << std::endl; 
+        std::cout << "Error! File " << filename << " doesn't start with P or B!" << std::endl; 
         return 0;
     }
     
@@ -64,19 +68,18 @@ GLuint App::LoadTexture()
             format = GL_LUMINANCE;
             type = 4;
             break;
-        case '5':
-            format = GL_LUMINANCE;
-            type = 5;
-            break;
+        case 'M':
+            format = GL_RGB;
+            type = 0;
     }
 
-    for (char nara = texture.get(); nara != '\n'; nara = texture.get())
-    {
-        std::cout << nara << std::endl;;
-    };
-    
+    //If the texture is PBM
     if (type == 4)
     {
+        for (char nara = texture.get(); nara != '\n'; nara = texture.get())
+        {
+            std::cout << nara << std::endl;;
+        };
        
         width = texture.get() - '0';
         texture.get();
@@ -140,4 +143,40 @@ GLuint App::LoadTexture()
 
         return texture_map;
     }
+    //If the texture is BMP
+    else if (type == 0)
+    {
+        //Closing and reopening the file resets the pointer. It still works without but it causes color issues.
+        texture.close();
+        std::ifstream texture(filename, std::ios::binary);
+        GLuint texmap;
+        char* data;
+        //Since the whole data is already almost good, I just send everything to the data buffer
+        data = (char*)malloc(width * height * 3);
+        texture.read(data, width * height * 3);
+        texture.close();
+
+        //This part wouldn't exist if BMP switched red and blue.
+        //This parts simply switch back red and blue to follow the RGB format.
+        for (int i = 0; i < width * height; ++i)
+        {
+            unsigned char blue, red;
+            blue = data[i * 3];
+            red = data[i * 3 + 2];
+            data[i * 3] = red;
+            data[i * 3 + 2] = blue;
+        }
+
+        glGenTextures(1, &texmap);
+        glBindTexture(GL_TEXTURE_2D, texmap);
+        glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
+        glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_NEAREST);
+
+        glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+        gluBuild2DMipmaps(GL_TEXTURE_2D, 3, width, height, GL_RGB, GL_UNSIGNED_BYTE, data);
+        free(data);
+
+        return texmap;
+    }
+
 }

@@ -1,15 +1,17 @@
 ﻿  draw.cpp
+C:\Users\g.martineaux\Documents\C++\GP\OpenGL\Live-Intro-OpenGL-Prep\src\app.h(16,10): warning C4200: extension non standard utilisée : tableau de taille zéro dans un struct/union
+C:\Users\g.martineaux\Documents\C++\GP\OpenGL\Live-Intro-OpenGL-Prep\src\app.h(16,10): message : Ce membre va être ignoré par un constructeur par défaut, ou par un opérateur d'assignation de copie/déplacement
 C:\Users\g.martineaux\Documents\C++\GP\OpenGL\Live-Intro-OpenGL-Prep\src\draw.cpp(5,2): warning C4091: 'typedef ' : ignoré à gauche de 'float3' quand aucune variable n'est déclarée
 C:\Users\g.martineaux\Documents\C++\GP\OpenGL\Live-Intro-OpenGL-Prep\src\draw.cpp(8,2): warning C4091: 'typedef ' : ignoré à gauche de 'float2' quand aucune variable n'est déclarée
-C:\Users\g.martineaux\Documents\C++\GP\OpenGL\Live-Intro-OpenGL-Prep\src\draw.cpp(70,20): warning C4244: 'argument' : conversion de 'int' en 'GLfloat', perte possible de données
-C:\Users\g.martineaux\Documents\C++\GP\OpenGL\Live-Intro-OpenGL-Prep\src\draw.cpp(75,15): warning C4244: 'argument' : conversion de 'int' en 'GLfloat', perte possible de données
 C:\Users\g.martineaux\Documents\C++\GP\OpenGL\Live-Intro-OpenGL-Prep\src\draw.cpp(80,20): warning C4244: 'argument' : conversion de 'int' en 'GLfloat', perte possible de données
-C:\Users\g.martineaux\Documents\C++\GP\OpenGL\Live-Intro-OpenGL-Prep\src\draw.cpp(93,18): warning C4244: 'initialisation' : conversion de 'double' en 'float', perte possible de données
-C:\Users\g.martineaux\Documents\C++\GP\OpenGL\Live-Intro-OpenGL-Prep\src\draw.cpp(94,12): warning C4244: 'initialisation' : conversion de 'double' en 'float', perte possible de données
-C:\Users\g.martineaux\Documents\C++\GP\OpenGL\Live-Intro-OpenGL-Prep\src\draw.cpp(95,13): warning C4244: 'initialisation' : conversion de 'double' en 'float', perte possible de données
-C:\Users\g.martineaux\Documents\C++\GP\OpenGL\Live-Intro-OpenGL-Prep\src\draw.cpp(97,19): warning C4244: 'initialisation' : conversion de 'double' en 'float', perte possible de données
-C:\Users\g.martineaux\Documents\C++\GP\OpenGL\Live-Intro-OpenGL-Prep\src\draw.cpp(98,12): warning C4244: 'initialisation' : conversion de 'double' en 'float', perte possible de données
-C:\Users\g.martineaux\Documents\C++\GP\OpenGL\Live-Intro-OpenGL-Prep\src\draw.cpp(99,13): warning C4244: 'initialisation' : conversion de 'double' en 'float', perte possible de données
-C:\Users\g.martineaux\Documents\C++\GP\OpenGL\Live-Intro-OpenGL-Prep\src\draw.cpp(104,12): warning C4244: 'initialisation' : conversion de 'double' en 'float', perte possible de données
-C:\Users\g.martineaux\Documents\C++\GP\OpenGL\Live-Intro-OpenGL-Prep\src\draw.cpp(105,12): warning C4244: 'initialisation' : conversion de 'double' en 'float', perte possible de données
+C:\Users\g.martineaux\Documents\C++\GP\OpenGL\Live-Intro-OpenGL-Prep\src\draw.cpp(85,15): warning C4244: 'argument' : conversion de 'int' en 'GLfloat', perte possible de données
+C:\Users\g.martineaux\Documents\C++\GP\OpenGL\Live-Intro-OpenGL-Prep\src\draw.cpp(90,20): warning C4244: 'argument' : conversion de 'int' en 'GLfloat', perte possible de données
+C:\Users\g.martineaux\Documents\C++\GP\OpenGL\Live-Intro-OpenGL-Prep\src\draw.cpp(102,18): warning C4244: 'initialisation' : conversion de 'double' en 'float', perte possible de données
+C:\Users\g.martineaux\Documents\C++\GP\OpenGL\Live-Intro-OpenGL-Prep\src\draw.cpp(103,14): warning C4244: 'initialisation' : conversion de 'double' en 'float', perte possible de données
+C:\Users\g.martineaux\Documents\C++\GP\OpenGL\Live-Intro-OpenGL-Prep\src\draw.cpp(104,14): warning C4244: 'initialisation' : conversion de 'double' en 'float', perte possible de données
+C:\Users\g.martineaux\Documents\C++\GP\OpenGL\Live-Intro-OpenGL-Prep\src\draw.cpp(106,19): warning C4244: 'initialisation' : conversion de 'double' en 'float', perte possible de données
+C:\Users\g.martineaux\Documents\C++\GP\OpenGL\Live-Intro-OpenGL-Prep\src\draw.cpp(107,14): warning C4244: 'initialisation' : conversion de 'double' en 'float', perte possible de données
+C:\Users\g.martineaux\Documents\C++\GP\OpenGL\Live-Intro-OpenGL-Prep\src\draw.cpp(108,14): warning C4244: 'initialisation' : conversion de 'double' en 'float', perte possible de données
+C:\Users\g.martineaux\Documents\C++\GP\OpenGL\Live-Intro-OpenGL-Prep\src\draw.cpp(113,12): warning C4244: 'initialisation' : conversion de 'double' en 'float', perte possible de données
+C:\Users\g.martineaux\Documents\C++\GP\OpenGL\Live-Intro-OpenGL-Prep\src\draw.cpp(114,12): warning C4244: 'initialisation' : conversion de 'double' en 'float', perte possible de données
   Live-Intro-OpenGL-Prep.vcxproj -> C:\Users\g.martineaux\Documents\C++\GP\OpenGL\x64\Debug\Live-Intro-OpenGL-Prep.exe

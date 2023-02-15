@@ -13,7 +13,8 @@ class App
 		//Camera position
 		float cameraX = 2.5f; float cameraY = -0.5f; float cameraZ = 7.f;
 
-		GLuint tex;
+		GLuint tex[];
 
-		GLuint LoadTexture();
+		//Loads the textures
+		GLuint LoadTexture(const char* filename, GLuint width = 0, GLuint height = 0);
 };

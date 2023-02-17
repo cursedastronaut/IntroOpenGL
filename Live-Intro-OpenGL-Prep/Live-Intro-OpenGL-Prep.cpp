@@ -15,7 +15,7 @@ App* app = new App();
 //Global creation of the class Camera.
 Camera* cam = new Camera();
 //Global creation of the class Lights
-Light* light = new Light({0,1.5f,0}, GL_LIGHT1);
+Light* light = new Light({0,1.5f,-2}, GL_LIGHT1);
 
 //Telling main() that display() exists despite being declared after.
 void display();

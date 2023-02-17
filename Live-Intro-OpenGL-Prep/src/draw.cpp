@@ -196,7 +196,7 @@ void textureOrColor(float3 color, float2 texture, bool isTexture)
 
 
 
-void draw::drawQuad3D(float3 inPos, float3 endPos, float3 color, GLuint tex, bool isTexture)
+void draw::drawQuad3D(float3 inPos, float3 endPos, float3 color, GLuint tex, bool isTexture, float3 normal)
 {
 	float3 colors[] = {
 		{color.x, color.y, color.z},
@@ -205,12 +205,7 @@ void draw::drawQuad3D(float3 inPos, float3 endPos, float3 color, GLuint tex, boo
 		{255, color.y, color.z},
 	};
 
-	if (endPos.y - inPos.y == 0)
-		glNormal3f(0, 1, 0);
-	else if (endPos.x - inPos.x == 0)
-		glNormal3f(1, 0, 0);
-	else if (endPos.z - inPos.z == 0)
-		glNormal3f(0, 0, 1);
+	glNormal3f(normal.x, normal.y, normal.z);
 
 
 	if (isTexture)
@@ -245,17 +240,17 @@ void draw::drawQuad3D(float3 inPos, float3 endPos, float3 color, GLuint tex, boo
 void draw::drawCubeNoRes(float3 inPos, float3 endPos, float3 color, GLuint tex, bool isTexture)
 {
 	//Face
-	draw::drawQuad3D(inPos, { endPos.x, endPos.y, inPos.z }, color, tex, isTexture);
+	draw::drawQuad3D(inPos, { endPos.x, endPos.y, inPos.z }, color, tex, isTexture, {0,0,-1});
 	//Floor
-	draw::drawQuad3D(inPos, { endPos.x, inPos.y, endPos.z }, color, tex, isTexture);
+	draw::drawQuad3D(inPos, { endPos.x, inPos.y, endPos.z }, color, tex, isTexture, { 0,-1,0 });
 	//Back
-	draw::drawQuad3D(endPos, { inPos.x, inPos.y, endPos.z }, color, tex, isTexture);
+	draw::drawQuad3D(endPos, { inPos.x, inPos.y, endPos.z }, color, tex, isTexture, {0, 0, +1});
 	//Roof
-	draw::drawQuad3D({inPos.x, endPos.y, inPos.z}, { endPos.x, endPos.y, endPos.z }, color, tex, isTexture);
+	draw::drawQuad3D({inPos.x, endPos.y, inPos.z}, { endPos.x, endPos.y, endPos.z }, color, tex, isTexture, { 0,+1,0 });
 	//Wall 1
-	draw::drawQuad3D(inPos, {inPos.x, endPos.y, endPos.z}, color, tex, isTexture);
+	draw::drawQuad3D(inPos, {inPos.x, endPos.y, endPos.z}, color, tex, isTexture, { +1,0,0 });
 	//Wall 2
-	draw::drawQuad3D({endPos.x, inPos.y, inPos.z}, { endPos.x, endPos.y, endPos.z }, color, tex, isTexture);
+	draw::drawQuad3D({endPos.x, inPos.y, inPos.z}, { endPos.x, endPos.y, endPos.z }, color, tex, isTexture, { -1,0,1 });
 
 
 }
@@ -264,7 +259,7 @@ void draw::drawCubeNoRes(float3 inPos, float3 endPos, float3 color, GLuint tex, 
 void draw::drawMaze(GLuint tex)
 {
 	//Floor
-	drawQuad3D({ 0,-1,0 }, { 5,-1,5 }, { 1,0,0 }, tex);
+	drawQuad3D({ 0,-1,0 }, { 5,-1,5 }, { 1,0,0 }, tex, true, { 0,-1,0 });
 
 	//Walls
 	drawCubeNoRes({ 0,-1,0 }, { 2 , 0 , 0.1f }, { 0,1,0 }, tex);

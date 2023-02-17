@@ -36,7 +36,7 @@ namespace draw
     //Draw Maze
     void drawMaze(GLuint tex);
 
-    void drawQuad3D(float3 inPos, float3 endPos, float3 color, GLuint tex, bool isTexture = true);
+    void drawQuad3D(float3 inPos, float3 endPos, float3 color, GLuint tex, bool isTexture, float3 normal);
 
     //WARNING!!
     //This part was done after the project was finished. It is not meant to be marked.

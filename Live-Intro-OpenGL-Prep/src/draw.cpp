@@ -242,7 +242,7 @@ void draw::drawQuad3D(float3 inPos, float3 endPos, float3 color, GLuint tex, boo
 		glBindTexture(GL_TEXTURE_2D, 0);
 }
 
-void drawCubeNoRes(float3 inPos, float3 endPos, float3 color, GLuint tex, bool isTexture = true)
+void draw::drawCubeNoRes(float3 inPos, float3 endPos, float3 color, GLuint tex, bool isTexture)
 {
 	//Face
 	draw::drawQuad3D(inPos, { endPos.x, endPos.y, inPos.z }, color, tex, isTexture);
@@ -287,4 +287,54 @@ void draw::drawMaze(GLuint tex)
 	drawCubeNoRes({ 4,-1,2 }, { 4.1f , 0 , 4 }, { 0,1,0 }, tex);
 
 	drawCubeNoRes({ 0,0,6 }, { 1,1,7 }, { 0,1,0 }, tex);
+}
+
+
+
+//WARNING!!
+//This part was done after the project was finished. It is not meant to be marked.
+void draw::drawGun(float3 inPos, float3 endPos, float3 color, GLuint tex, bool isTexture)
+{
+	float3 colors[] = {
+		{color.x, color.y, color.z},
+		{color.x, color.y, 255},
+		{color.x, 255, color.z},
+		{255, color.y, color.z},
+	};
+
+	if (endPos.y - inPos.y == 0)
+		glNormal3f(0, 1, 0);
+	else if (endPos.x - inPos.x == 0)
+		glNormal3f(1, 0, 0);
+	else if (endPos.z - inPos.z == 0)
+		glNormal3f(0, 0, 1);
+
+
+	if (isTexture)
+		glBindTexture(GL_TEXTURE_2D, tex);
+	glBegin(GL_QUADS);
+	glColor3f(1, 0, 1);
+	textureOrColor(colors[0], { 0,1 }, isTexture);
+	glVertex3f(inPos.x, inPos.y, endPos.z);
+	if (endPos.x - inPos.x == 0)
+	{
+		textureOrColor(colors[1], { 1,1 }, isTexture);
+		glVertex3f(endPos.x, inPos.y, inPos.z);
+		textureOrColor(colors[2], { 1,0 }, isTexture);
+		glVertex3f(endPos.x, endPos.y, inPos.z);
+		textureOrColor(colors[3], { 0,0 }, isTexture);
+		glVertex3f(inPos.x, endPos.y, endPos.z);
+	}
+	else
+	{
+		textureOrColor(colors[1], { 1,1 }, isTexture);
+		glVertex3f(endPos.x, inPos.y, endPos.z);
+		textureOrColor(colors[2], { 1,0 }, isTexture);
+		glVertex3f(endPos.x, endPos.y, inPos.z);
+		textureOrColor(colors[3], { 0,0 }, isTexture);
+		glVertex3f(inPos.x, endPos.y, inPos.z);
+	}
+	glEnd();
+	if (isTexture)
+		glBindTexture(GL_TEXTURE_2D, 0);
 }

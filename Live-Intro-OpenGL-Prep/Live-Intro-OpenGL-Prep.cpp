@@ -7,13 +7,15 @@
 #include <imgui/imgui_impl_opengl2.h>
 #include "src/app.h"
 #include "src/camera.h"
-
+#include "src/lights.h"
 
 
 //Global creation of the class App.
 App* app = new App();
 //Global creation of the class Camera.
 Camera* cam = new Camera();
+//Global creation of the class Lights
+Light* light = new Light({0,1.5f,0}, GL_LIGHT1);
 
 //Telling main() that display() exists despite being declared after.
 void display();
@@ -45,7 +47,7 @@ int main(int argc, char* argv[])
 	glEnable(GL_TEXTURE_2D);
 	app->tex[0] = app->LoadTexture("binary.pbm");
 	app->tex[1] = app->LoadTexture("marwan.bmp", 504, 504);
-	app->tex[2] = app->LoadTexture("gun2.bmp", 504, 504, false);
+	app->tex[2] = app->LoadTexturePNG("gun3.png");
 
 	IMGUI_CHECKVERSION();
 	ImGui::CreateContext();
@@ -60,8 +62,6 @@ int main(int argc, char* argv[])
 	ImGui::StyleColorsDark();
 
 	glutMainLoop();
-	ImGui_ImplGLUT_Shutdown();
-	ImGui_ImplOpenGL2_Shutdown();
 	return 0;
 }
 
@@ -75,13 +75,11 @@ void display() {
 	glEnable(GL_TEXTURE_2D);
 	glEnable(GL_LIGHTING);
 	glEnable(GL_COLOR_MATERIAL);
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	glDepthFunc(GL_LESS);
 	glClearColor(1, 0.2, 0.5f, 1);
-	GLfloat  ambientLight[] = { 0.1f, 0.1f, 0.1f, 1.0f };
-	GLfloat  diffuseLight[] = { 0.7f, 0.7f, 0.7f, 1.0f };
-	GLfloat  specular[] = { 0.2f, 0.2f, 0.2f, 1.0f };
 	GLfloat  specref[] = { 1.0f, 1.0f, 1.0f, 1.0f };
-	GLfloat  position[] = { 0.0f, 1.0f, -5.0f, 1.0f };
 	GLfloat  shininess = 1;
 	
 	
@@ -101,12 +99,9 @@ void display() {
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 	cam->LookAt();
-	glLightfv(GL_LIGHT1, GL_AMBIENT, ambientLight);
-	glLightfv(GL_LIGHT1, GL_DIFFUSE, diffuseLight);
-	glLightfv(GL_LIGHT1, GL_SPECULAR, specular);
-	glLightfv(GL_LIGHT1, GL_POSITION, position);
-	glEnable(GL_LIGHT1);
-
+	
+	//Light1
+	light->Update();
 
 	//Gizmo
 	glPushMatrix();
@@ -171,7 +166,7 @@ void display() {
 	glDisable(GL_LIGHT1);
 	glDisable(GL_LIGHTING);
 	glDisable(GL_COLOR_MATERIAL);
-	draw::drawQuad3D({-0.2f, -1.0f - cam->offset - 0.2f, 0},
+	draw::drawGun({-0.2f, -1.0f - cam->offset - 0.2f, 0},
 		{ 0.2f, -0.4f - cam->offset - 0.2f, 0 }, {1,1,1}, app->tex[2], true);
 	
 	ImGui_ImplGLUT_NewFrame();

@@ -156,6 +156,7 @@
     <ClCompile Include="src\app.cpp" />
     <ClCompile Include="src\camera.cpp" />
     <ClCompile Include="src\draw.cpp" />
+    <ClCompile Include="src\lights.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\..\..\Downloads\draw.h" />
@@ -172,6 +173,8 @@
     <ClInclude Include="external\include\freeglut\GL\freeglut_std.h" />
     <ClInclude Include="external\include\freeglut\GL\freeglut_ucall.h" />
     <ClInclude Include="external\include\freeglut\GL\glut.h" />
+    <ClInclude Include="src\lights.h" />
+    <ClInclude Include="src\stb_image.h" />
     <ClInclude Include="src\draw.h" />
     <ClInclude Include="src\app.h" />
     <ClInclude Include="src\camera.h" />

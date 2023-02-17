@@ -4,7 +4,9 @@
 #include <cwchar>
 #include <fstream>
 #include <iostream>
-
+#define STB_IMAGE_IMPLEMENTATION
+#include "stb_image.h"
+#define STBI_FREE
 //Loads the textures
 GLuint App::LoadTexture(const char* filename, GLuint width, GLuint height, bool isAlpha)
 {
@@ -121,6 +123,7 @@ GLuint App::LoadTexture(const char* filename, GLuint width, GLuint height, bool 
         if (isAlpha)
         {
             colorChannels = 4;
+            format = GL_RGBA;
         }
         //Since the whole data is already almost good, I just send everything to the data buffer
         data = (char*)malloc(width * height * colorChannels);
@@ -152,4 +155,26 @@ GLuint App::LoadTexture(const char* filename, GLuint width, GLuint height, bool 
         return texmap;
     }
 
+}
+
+//WARNING!!
+//This part was done after the project was finished. It is not meant to be marked.
+GLuint App::LoadTexturePNG(const char* filename)
+{
+    int x, y, n;
+    unsigned char *data = stbi_load(filename, &x, &y, &n, 4);
+    // ... process data if not NULL ...
+    // ... x = width, y = height, n = # 8-bit components per pixel ...
+    // ... replace '0' with '1'..'4' to force that many components per pixel
+    // ... but 'n' will always be the number that it would have been if you said 0
+    GLuint texmap;
+    glGenTextures(1, &texmap);
+    glBindTexture(GL_TEXTURE_2D, texmap);
+    glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
+    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_NEAREST);
+
+    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    gluBuild2DMipmaps(GL_TEXTURE_2D, n, x, y, GL_RGBA, GL_UNSIGNED_BYTE, data);
+    stbi_image_free(data);
+    return texmap;
 }

@@ -37,5 +37,10 @@ namespace draw
     void drawMaze(GLuint tex);
 
     void drawQuad3D(float3 inPos, float3 endPos, float3 color, GLuint tex, bool isTexture = true);
+
+    //WARNING!!
+    //This part was done after the project was finished. It is not meant to be marked.
+    void drawGun(float3 inPos, float3 endPos, float3 color, GLuint tex, bool isTexture = true);
+    void drawCubeNoRes(float3 inPos, float3 endPos, float3 color, GLuint tex, bool isTexture = true);
 };
 

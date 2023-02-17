@@ -1,26 +1,10 @@
-﻿  camera.cpp
-C:\Users\g.martineaux\Documents\C++\GP\OpenGL\Live-Intro-OpenGL-Prep\src\app.h(11,10): warning C4200: extension non standard utilisée : tableau de taille zéro dans un struct/union
-C:\Users\g.martineaux\Documents\C++\GP\OpenGL\Live-Intro-OpenGL-Prep\src\app.h(11,10): message : Ce membre va être ignoré par un constructeur par défaut, ou par un opérateur d'assignation de copie/déplacement
+﻿  Live-Intro-OpenGL-Prep.cpp
 C:\Users\g.martineaux\Documents\C++\GP\OpenGL\Live-Intro-OpenGL-Prep\src\draw.h(7,2): warning C4091: 'typedef ' : ignoré à gauche de 'float3' quand aucune variable n'est déclarée
 C:\Users\g.martineaux\Documents\C++\GP\OpenGL\Live-Intro-OpenGL-Prep\src\draw.h(10,2): warning C4091: 'typedef ' : ignoré à gauche de 'float2' quand aucune variable n'est déclarée
-C:\Users\g.martineaux\Documents\C++\GP\OpenGL\Live-Intro-OpenGL-Prep\src\camera.cpp(23,59): warning C4244: 'argument' : conversion de 'double' en 'float', perte possible de données
-C:\Users\g.martineaux\Documents\C++\GP\OpenGL\Live-Intro-OpenGL-Prep\src\camera.cpp(23,85): warning C4244: '-=' : conversion de 'double' en 'float', perte possible de données
-C:\Users\g.martineaux\Documents\C++\GP\OpenGL\Live-Intro-OpenGL-Prep\src\camera.cpp(24,59): warning C4244: 'argument' : conversion de 'double' en 'float', perte possible de données
-C:\Users\g.martineaux\Documents\C++\GP\OpenGL\Live-Intro-OpenGL-Prep\src\camera.cpp(24,85): warning C4244: '-=' : conversion de 'double' en 'float', perte possible de données
-C:\Users\g.martineaux\Documents\C++\GP\OpenGL\Live-Intro-OpenGL-Prep\src\camera.cpp(29,59): warning C4244: 'argument' : conversion de 'double' en 'float', perte possible de données
-C:\Users\g.martineaux\Documents\C++\GP\OpenGL\Live-Intro-OpenGL-Prep\src\camera.cpp(29,85): warning C4244: '+=' : conversion de 'double' en 'float', perte possible de données
-C:\Users\g.martineaux\Documents\C++\GP\OpenGL\Live-Intro-OpenGL-Prep\src\camera.cpp(30,59): warning C4244: 'argument' : conversion de 'double' en 'float', perte possible de données
-C:\Users\g.martineaux\Documents\C++\GP\OpenGL\Live-Intro-OpenGL-Prep\src\camera.cpp(30,85): warning C4244: '+=' : conversion de 'double' en 'float', perte possible de données
-C:\Users\g.martineaux\Documents\C++\GP\OpenGL\Live-Intro-OpenGL-Prep\src\camera.cpp(35,73): warning C4244: 'argument' : conversion de 'double' en 'float', perte possible de données
-C:\Users\g.martineaux\Documents\C++\GP\OpenGL\Live-Intro-OpenGL-Prep\src\camera.cpp(35,99): warning C4244: '+=' : conversion de 'double' en 'float', perte possible de données
-C:\Users\g.martineaux\Documents\C++\GP\OpenGL\Live-Intro-OpenGL-Prep\src\camera.cpp(36,73): warning C4244: 'argument' : conversion de 'double' en 'float', perte possible de données
-C:\Users\g.martineaux\Documents\C++\GP\OpenGL\Live-Intro-OpenGL-Prep\src\camera.cpp(36,99): warning C4244: '+=' : conversion de 'double' en 'float', perte possible de données
-C:\Users\g.martineaux\Documents\C++\GP\OpenGL\Live-Intro-OpenGL-Prep\src\camera.cpp(41,73): warning C4244: 'argument' : conversion de 'double' en 'float', perte possible de données
-C:\Users\g.martineaux\Documents\C++\GP\OpenGL\Live-Intro-OpenGL-Prep\src\camera.cpp(41,99): warning C4244: '+=' : conversion de 'double' en 'float', perte possible de données
-C:\Users\g.martineaux\Documents\C++\GP\OpenGL\Live-Intro-OpenGL-Prep\src\camera.cpp(42,73): warning C4244: 'argument' : conversion de 'double' en 'float', perte possible de données
-C:\Users\g.martineaux\Documents\C++\GP\OpenGL\Live-Intro-OpenGL-Prep\src\camera.cpp(42,99): warning C4244: '+=' : conversion de 'double' en 'float', perte possible de données
-C:\Users\g.martineaux\Documents\C++\GP\OpenGL\Live-Intro-OpenGL-Prep\src\camera.cpp(79,70): warning C4244: 'argument' : conversion de 'double' en 'float', perte possible de données
-C:\Users\g.martineaux\Documents\C++\GP\OpenGL\Live-Intro-OpenGL-Prep\src\camera.cpp(79,57): warning C4244: '=' : conversion de 'double' en 'float', perte possible de données
-C:\Users\g.martineaux\Documents\C++\GP\OpenGL\Live-Intro-OpenGL-Prep\src\camera.cpp(81,70): warning C4244: 'argument' : conversion de 'double' en 'float', perte possible de données
-C:\Users\g.martineaux\Documents\C++\GP\OpenGL\Live-Intro-OpenGL-Prep\src\camera.cpp(81,57): warning C4244: '=' : conversion de 'double' en 'float', perte possible de données
+C:\Users\g.martineaux\Documents\C++\GP\OpenGL\Live-Intro-OpenGL-Prep\src\app.h(11,10): warning C4200: extension non standard utilisée : tableau de taille zéro dans un struct/union
+C:\Users\g.martineaux\Documents\C++\GP\OpenGL\Live-Intro-OpenGL-Prep\src\app.h(11,10): message : Ce membre va être ignoré par un constructeur par défaut, ou par un opérateur d'assignation de copie/déplacement
+C:\Users\g.martineaux\Documents\C++\GP\OpenGL\Live-Intro-OpenGL-Prep\src\lights.h(11,2): warning C4091: 'typedef ' : ignoré à gauche de 'lightsParam' quand aucune variable n'est déclarée
+C:\Users\g.martineaux\Documents\C++\GP\OpenGL\Live-Intro-OpenGL-Prep\Live-Intro-OpenGL-Prep.cpp(81,30): warning C4305: 'argument' : troncation de 'double' à 'GLclampf'
+C:\Users\g.martineaux\Documents\C++\GP\OpenGL\Live-Intro-OpenGL-Prep\Live-Intro-OpenGL-Prep.cpp(97,38): warning C4244: 'argument' : conversion de 'GLfloat' en 'GLint', perte possible de données
+C:\Users\g.martineaux\Documents\C++\GP\OpenGL\Live-Intro-OpenGL-Prep\Live-Intro-OpenGL-Prep.cpp(160,38): warning C4244: 'argument' : conversion de 'GLfloat' en 'GLint', perte possible de données
   Live-Intro-OpenGL-Prep.vcxproj -> C:\Users\g.martineaux\Documents\C++\GP\OpenGL\x64\Debug\Live-Intro-OpenGL-Prep.exe

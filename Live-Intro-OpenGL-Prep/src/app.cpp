@@ -178,3 +178,101 @@ GLuint App::LoadTexturePNG(const char* filename)
     stbi_image_free(data);
     return texmap;
 }
+
+void App::Update()
+{
+    if (ImGui::IsKeyDown(ImGuiKey_1))
+        currentExercise = 1;
+    if (ImGui::IsKeyDown(ImGuiKey_2))
+        currentExercise = 2;
+    if (ImGui::IsKeyDown(ImGuiKey_3))
+        currentExercise = 3;
+    if (ImGui::IsKeyDown(ImGuiKey_4))
+        currentExercise = 4;
+    if (ImGui::IsKeyDown(ImGuiKey_5))
+        currentExercise = 5;
+
+    GLfloat  specref[] = { 1.0f, 1.0f, 1.0f, 1.0f };
+    GLfloat  shininess = 1;
+    glMaterialfv(GL_FRONT, GL_SPECULAR, specref);
+    glMateriali(GL_FRONT, GL_SHININESS, shininess);
+
+    switch (currentExercise)
+    {
+    
+    case 4: //Lighting is already enabled
+        glEnable(GL_LIGHTING);
+    case 2: //You can already move the camera, no matter the exercise.
+    case 1 :
+        //Gizmo
+        glPushMatrix();
+        glTranslatef(0, 0, -6.f);
+        draw::drawGizmo();
+        glPopMatrix();
+
+        //Cone
+        glPushMatrix();
+        glTranslatef(1, -1, -3.f);
+        glRotatef(angle, 1.0f, 1.0f, 0.f);
+        draw::drawCone(5);
+        glPopMatrix();
+
+        //Sphere
+        glPushMatrix();
+        glTranslatef(-1.0, 1.0, -3.f);
+        glRotatef(angle, 1.0, 0.0f, 1.0f);
+        draw::drawSphere(35, 35); //ACTUAL SPHERE DRAWING
+        glPopMatrix();
+
+
+        //Cube
+        glPushMatrix();
+        glTranslatef(2.0, 2.0, -5.f);
+        glRotatef(angle, 1.0, 0.0f, 1.0f);
+        draw::drawCube(10, 10, 30); //ACTUAL CUBE DRAWING
+        glPopMatrix();
+
+
+        //Quad
+        //2D Shapes aren't rotating for visual clarity reasons.
+        glPushMatrix();
+        glTranslatef(0.0, 2.0, -7.f);
+        draw::drawQuad(0.5f); //Actual Quad Drawing
+        glPopMatrix();
+
+        //Triangle
+        //2D Shapes aren't rotating for visual clarity reasons.
+        glPushMatrix();
+        glTranslatef(0, -1.5f, -5.f);
+        draw::drawTriangle();
+        glPopMatrix();
+
+        //Point Sphere
+        glPushMatrix();
+        glTranslatef(-1.0, -1.0, -3.f);
+        glRotatef(angle, 1.0, 0.0f, 1.0f);
+        draw::drawPointSphere(50, 50); //Actual Point Sphere Drawing
+        glPopMatrix();
+        break;
+    
+    case 3:
+        glBindTexture(GL_TEXTURE_2D, tex[1]);
+        glPushMatrix();
+        glTranslatef(0.0, 2.0, -7.f);
+        draw::drawQuad(0.5f); //Actual Quad Drawing
+        glPopMatrix();
+        glBindTexture(GL_TEXTURE_2D, 0);
+
+        draw::drawCubeNoRes({ -4, -2, -7 }, { -2, 0, -5 }, { 1,1,1 }, tex[1], true); 
+        break;
+    
+    case 5:
+        glEnable(GL_LIGHTING);
+        glColorMaterial(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE);
+        glMaterialfv(GL_FRONT, GL_SPECULAR, specref);
+        glMateriali(GL_FRONT, GL_SHININESS, shininess);
+        draw::drawMaze(tex[0]);
+    default:
+        break;
+    }
+}

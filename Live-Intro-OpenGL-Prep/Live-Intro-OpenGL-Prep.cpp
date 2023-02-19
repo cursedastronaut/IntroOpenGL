@@ -73,14 +73,12 @@ void display() {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glEnable(GL_DEPTH_TEST);
 	glEnable(GL_TEXTURE_2D);
-	glEnable(GL_LIGHTING);
+	
 	glEnable(GL_COLOR_MATERIAL);
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	glDepthFunc(GL_LESS);
 	glClearColor(1, 0.2, 0.5f, 1);
-	GLfloat  specref[] = { 1.0f, 1.0f, 1.0f, 1.0f };
-	GLfloat  shininess = 1;
 	
 	
 	
@@ -93,72 +91,20 @@ void display() {
 	//distored when the window is resized.
 	cam->Update();
 
-	glMaterialfv(GL_FRONT, GL_SPECULAR, specref);
-	glMateriali(GL_FRONT, GL_SHININESS, shininess);
+	
 
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 	cam->LookAt();
 	
+
 	//Light1
 	light->Update();
+	app->Update();
 
-	//Gizmo
-	glPushMatrix();
-	glTranslatef(0, 0, -6.f);
-	draw::drawGizmo();
-	glPopMatrix();
+	
 
-	//Cone
-	glPushMatrix();
-	glTranslatef(1, -1, -3.f);
-	glRotatef(app->angle, 1.0f, 1.0f, 0.f);
-	draw::drawCone(5);
-	glPopMatrix();
-
-	//Sphere
-	glPushMatrix();
-	glTranslatef(-1.0, 1.0, -3.f);
-	glRotatef(app->angle, 1.0, 0.0f, 1.0f);
-	draw::drawSphere(35, 35); //ACTUAL SPHERE DRAWING
-	glPopMatrix();
-
-
-	//Cube
-	glPushMatrix();
-	glTranslatef(2.0, 2.0, -5.f);
-	glRotatef(app->angle, 1.0, 0.0f, 1.0f);
-	draw::drawCube(10, 10, 30); //ACTUAL CUBE DRAWING
-	glPopMatrix();
-
-
-	//Quad
-	//2D Shapes aren't rotating for visual clarity reasons.
-	glBindTexture(GL_TEXTURE_2D, app->tex[1]);
-	glPushMatrix();
-	glTranslatef(0.0, 2.0, -7.f);
-	draw::drawQuad(0.5f); //Actual Quad Drawing
-	glPopMatrix();
-	glBindTexture(GL_TEXTURE_2D, 0);
-
-	//Triangle
-	//2D Shapes aren't rotating for visual clarity reasons.
-	glPushMatrix();
-	glTranslatef(0, -1.5f, -5.f);
-	draw::drawTriangle();
-	glPopMatrix();
-
-	//Point Sphere
-	glPushMatrix();
-	glTranslatef(-1.0, -1.0, -3.f);
-	glRotatef(app->angle, 1.0, 0.0f, 1.0f);
-	draw::drawPointSphere(50, 50); //Actual Point Sphere Drawing
-	glPopMatrix();
-
-	glColorMaterial(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE);
-	glMaterialfv(GL_FRONT, GL_SPECULAR, specref);
-	glMateriali(GL_FRONT, GL_SHININESS, shininess);
-	draw::drawMaze(app->tex[0]);
+	
 
 	glLoadIdentity();
 	glMatrixMode(GL_PROJECTION);

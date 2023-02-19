@@ -1,17 +1,73 @@
-﻿  draw.cpp
-C:\Users\g.martineaux\Documents\C++\GP\OpenGL\Live-Intro-OpenGL-Prep\src\app.h(11,10): warning C4200: extension non standard utilisée : tableau de taille zéro dans un struct/union
-C:\Users\g.martineaux\Documents\C++\GP\OpenGL\Live-Intro-OpenGL-Prep\src\app.h(11,10): message : Ce membre va être ignoré par un constructeur par défaut, ou par un opérateur d'assignation de copie/déplacement
-C:\Users\g.martineaux\Documents\C++\GP\OpenGL\Live-Intro-OpenGL-Prep\src\draw.h(7,2): warning C4091: 'typedef ' : ignoré à gauche de 'float3' quand aucune variable n'est déclarée
-C:\Users\g.martineaux\Documents\C++\GP\OpenGL\Live-Intro-OpenGL-Prep\src\draw.h(10,2): warning C4091: 'typedef ' : ignoré à gauche de 'float2' quand aucune variable n'est déclarée
-C:\Users\g.martineaux\Documents\C++\GP\OpenGL\Live-Intro-OpenGL-Prep\src\draw.cpp(75,20): warning C4244: 'argument' : conversion de 'int' en 'GLfloat', perte possible de données
-C:\Users\g.martineaux\Documents\C++\GP\OpenGL\Live-Intro-OpenGL-Prep\src\draw.cpp(80,15): warning C4244: 'argument' : conversion de 'int' en 'GLfloat', perte possible de données
-C:\Users\g.martineaux\Documents\C++\GP\OpenGL\Live-Intro-OpenGL-Prep\src\draw.cpp(85,20): warning C4244: 'argument' : conversion de 'int' en 'GLfloat', perte possible de données
-C:\Users\g.martineaux\Documents\C++\GP\OpenGL\Live-Intro-OpenGL-Prep\src\draw.cpp(97,18): warning C4244: 'initialisation' : conversion de 'double' en 'float', perte possible de données
-C:\Users\g.martineaux\Documents\C++\GP\OpenGL\Live-Intro-OpenGL-Prep\src\draw.cpp(98,14): warning C4244: 'initialisation' : conversion de 'double' en 'float', perte possible de données
-C:\Users\g.martineaux\Documents\C++\GP\OpenGL\Live-Intro-OpenGL-Prep\src\draw.cpp(99,14): warning C4244: 'initialisation' : conversion de 'double' en 'float', perte possible de données
-C:\Users\g.martineaux\Documents\C++\GP\OpenGL\Live-Intro-OpenGL-Prep\src\draw.cpp(101,19): warning C4244: 'initialisation' : conversion de 'double' en 'float', perte possible de données
-C:\Users\g.martineaux\Documents\C++\GP\OpenGL\Live-Intro-OpenGL-Prep\src\draw.cpp(102,14): warning C4244: 'initialisation' : conversion de 'double' en 'float', perte possible de données
-C:\Users\g.martineaux\Documents\C++\GP\OpenGL\Live-Intro-OpenGL-Prep\src\draw.cpp(103,14): warning C4244: 'initialisation' : conversion de 'double' en 'float', perte possible de données
-C:\Users\g.martineaux\Documents\C++\GP\OpenGL\Live-Intro-OpenGL-Prep\src\draw.cpp(108,12): warning C4244: 'initialisation' : conversion de 'double' en 'float', perte possible de données
-C:\Users\g.martineaux\Documents\C++\GP\OpenGL\Live-Intro-OpenGL-Prep\src\draw.cpp(109,12): warning C4244: 'initialisation' : conversion de 'double' en 'float', perte possible de données
-  Live-Intro-OpenGL-Prep.vcxproj -> C:\Users\g.martineaux\Documents\C++\GP\OpenGL\x64\Debug\Live-Intro-OpenGL-Prep.exe
+﻿  Live-Intro-OpenGL-Prep.cpp
+C:\Users\Galaad\Documents\Dev\Free\opengl\Live-Intro-OpenGL-Prep\src\draw.h(7,2): warning C4091: 'typedef ' : ignoré à gauche de 'float3' quand aucune variable n'est déclarée
+C:\Users\Galaad\Documents\Dev\Free\opengl\Live-Intro-OpenGL-Prep\src\draw.h(10,2): warning C4091: 'typedef ' : ignoré à gauche de 'float2' quand aucune variable n'est déclarée
+C:\Users\Galaad\Documents\Dev\Free\opengl\Live-Intro-OpenGL-Prep\src\app.h(12,10): warning C4200: extension non standard utilisée : tableau de taille zéro dans un struct/union
+C:\Users\Galaad\Documents\Dev\Free\opengl\Live-Intro-OpenGL-Prep\src\app.h(12,10): message : Ce membre va être ignoré par un constructeur par défaut, ou par un opérateur d'assignation de copie/déplacement
+C:\Users\Galaad\Documents\Dev\Free\opengl\Live-Intro-OpenGL-Prep\src\lights.h(11,2): warning C4091: 'typedef ' : ignoré à gauche de 'lightsParam' quand aucune variable n'est déclarée
+C:\Users\Galaad\Documents\Dev\Free\opengl\Live-Intro-OpenGL-Prep\Live-Intro-OpenGL-Prep.cpp(81,30): warning C4305: 'argument' : troncation de 'double' à 'GLclampf'
+  app.cpp
+C:\Users\Galaad\Documents\Dev\Free\opengl\Live-Intro-OpenGL-Prep\src\draw.h(7,2): warning C4091: 'typedef ' : ignoré à gauche de 'float3' quand aucune variable n'est déclarée
+C:\Users\Galaad\Documents\Dev\Free\opengl\Live-Intro-OpenGL-Prep\src\draw.h(10,2): warning C4091: 'typedef ' : ignoré à gauche de 'float2' quand aucune variable n'est déclarée
+C:\Users\Galaad\Documents\Dev\Free\opengl\Live-Intro-OpenGL-Prep\src\app.h(12,10): warning C4200: extension non standard utilisée : tableau de taille zéro dans un struct/union
+C:\Users\Galaad\Documents\Dev\Free\opengl\Live-Intro-OpenGL-Prep\src\app.h(12,10): message : Ce membre va être ignoré par un constructeur par défaut, ou par un opérateur d'assignation de copie/déplacement
+C:\Users\Galaad\Documents\Dev\Free\opengl\Live-Intro-OpenGL-Prep\src\app.cpp(9,1): warning C4005: 'STBI_FREE' : redéfinition de macro
+C:\Users\Galaad\Documents\Dev\Free\opengl\Live-Intro-OpenGL-Prep\src\stb_image.h(683,1): message : voir la définition précédente de 'STBI_FREE'
+C:\Users\Galaad\Documents\Dev\Free\opengl\Live-Intro-OpenGL-Prep\src\app.cpp(78,27): warning C4018: '<' : incompatibilité signed/unsigned
+C:\Users\Galaad\Documents\Dev\Free\opengl\Live-Intro-OpenGL-Prep\src\app.cpp(82,31): warning C4018: '>=' : incompatibilité signed/unsigned
+C:\Users\Galaad\Documents\Dev\Free\opengl\Live-Intro-OpenGL-Prep\src\app.cpp(93,16): warning C4477: 'printf' : la chaîne de format '%x' nécessite un argument de type 'unsigned int', mais l'argument variadique 1 est de type '__int64'
+C:\Users\Galaad\Documents\Dev\Free\opengl\Live-Intro-OpenGL-Prep\src\app.cpp(93,16): message : utilisez '%llx' dans la chaîne de format
+C:\Users\Galaad\Documents\Dev\Free\opengl\Live-Intro-OpenGL-Prep\src\app.cpp(93,16): message : utilisez '%Ix' dans la chaîne de format
+C:\Users\Galaad\Documents\Dev\Free\opengl\Live-Intro-OpenGL-Prep\src\app.cpp(93,16): message : utilisez '%I64x' dans la chaîne de format
+C:\Users\Galaad\Documents\Dev\Free\opengl\Live-Intro-OpenGL-Prep\src\app.cpp(137,27): warning C4018: '<' : incompatibilité signed/unsigned
+C:\Users\Galaad\Documents\Dev\Free\opengl\Live-Intro-OpenGL-Prep\src\app.cpp(198,41): warning C4244: 'argument' : conversion de 'GLfloat' en 'GLint', perte possible de données
+C:\Users\Galaad\Documents\Dev\Free\opengl\Live-Intro-OpenGL-Prep\src\app.cpp(273,45): warning C4244: 'argument' : conversion de 'GLfloat' en 'GLint', perte possible de données
+  camera.cpp
+C:\Users\Galaad\Documents\Dev\Free\opengl\Live-Intro-OpenGL-Prep\src\app.h(12,10): warning C4200: extension non standard utilisée : tableau de taille zéro dans un struct/union
+C:\Users\Galaad\Documents\Dev\Free\opengl\Live-Intro-OpenGL-Prep\src\app.h(12,10): message : Ce membre va être ignoré par un constructeur par défaut, ou par un opérateur d'assignation de copie/déplacement
+C:\Users\Galaad\Documents\Dev\Free\opengl\Live-Intro-OpenGL-Prep\src\draw.h(7,2): warning C4091: 'typedef ' : ignoré à gauche de 'float3' quand aucune variable n'est déclarée
+C:\Users\Galaad\Documents\Dev\Free\opengl\Live-Intro-OpenGL-Prep\src\draw.h(10,2): warning C4091: 'typedef ' : ignoré à gauche de 'float2' quand aucune variable n'est déclarée
+C:\Users\Galaad\Documents\Dev\Free\opengl\Live-Intro-OpenGL-Prep\src\camera.cpp(23,59): warning C4244: 'argument' : conversion de 'double' en 'float', perte possible de données
+C:\Users\Galaad\Documents\Dev\Free\opengl\Live-Intro-OpenGL-Prep\src\camera.cpp(23,78): warning C4244: '-=' : conversion de 'double' en 'float', perte possible de données
+C:\Users\Galaad\Documents\Dev\Free\opengl\Live-Intro-OpenGL-Prep\src\camera.cpp(24,59): warning C4244: 'argument' : conversion de 'double' en 'float', perte possible de données
+C:\Users\Galaad\Documents\Dev\Free\opengl\Live-Intro-OpenGL-Prep\src\camera.cpp(24,78): warning C4244: '-=' : conversion de 'double' en 'float', perte possible de données
+C:\Users\Galaad\Documents\Dev\Free\opengl\Live-Intro-OpenGL-Prep\src\camera.cpp(29,59): warning C4244: 'argument' : conversion de 'double' en 'float', perte possible de données
+C:\Users\Galaad\Documents\Dev\Free\opengl\Live-Intro-OpenGL-Prep\src\camera.cpp(29,78): warning C4244: '+=' : conversion de 'double' en 'float', perte possible de données
+C:\Users\Galaad\Documents\Dev\Free\opengl\Live-Intro-OpenGL-Prep\src\camera.cpp(30,59): warning C4244: 'argument' : conversion de 'double' en 'float', perte possible de données
+C:\Users\Galaad\Documents\Dev\Free\opengl\Live-Intro-OpenGL-Prep\src\camera.cpp(30,78): warning C4244: '+=' : conversion de 'double' en 'float', perte possible de données
+C:\Users\Galaad\Documents\Dev\Free\opengl\Live-Intro-OpenGL-Prep\src\camera.cpp(35,73): warning C4244: 'argument' : conversion de 'double' en 'float', perte possible de données
+C:\Users\Galaad\Documents\Dev\Free\opengl\Live-Intro-OpenGL-Prep\src\camera.cpp(35,92): warning C4244: '+=' : conversion de 'double' en 'float', perte possible de données
+C:\Users\Galaad\Documents\Dev\Free\opengl\Live-Intro-OpenGL-Prep\src\camera.cpp(36,73): warning C4244: 'argument' : conversion de 'double' en 'float', perte possible de données
+C:\Users\Galaad\Documents\Dev\Free\opengl\Live-Intro-OpenGL-Prep\src\camera.cpp(36,92): warning C4244: '+=' : conversion de 'double' en 'float', perte possible de données
+C:\Users\Galaad\Documents\Dev\Free\opengl\Live-Intro-OpenGL-Prep\src\camera.cpp(41,73): warning C4244: 'argument' : conversion de 'double' en 'float', perte possible de données
+C:\Users\Galaad\Documents\Dev\Free\opengl\Live-Intro-OpenGL-Prep\src\camera.cpp(41,92): warning C4244: '+=' : conversion de 'double' en 'float', perte possible de données
+C:\Users\Galaad\Documents\Dev\Free\opengl\Live-Intro-OpenGL-Prep\src\camera.cpp(42,73): warning C4244: 'argument' : conversion de 'double' en 'float', perte possible de données
+C:\Users\Galaad\Documents\Dev\Free\opengl\Live-Intro-OpenGL-Prep\src\camera.cpp(42,92): warning C4244: '+=' : conversion de 'double' en 'float', perte possible de données
+C:\Users\Galaad\Documents\Dev\Free\opengl\Live-Intro-OpenGL-Prep\src\camera.cpp(79,70): warning C4244: 'argument' : conversion de 'double' en 'float', perte possible de données
+C:\Users\Galaad\Documents\Dev\Free\opengl\Live-Intro-OpenGL-Prep\src\camera.cpp(79,57): warning C4244: '=' : conversion de 'double' en 'float', perte possible de données
+C:\Users\Galaad\Documents\Dev\Free\opengl\Live-Intro-OpenGL-Prep\src\camera.cpp(81,70): warning C4244: 'argument' : conversion de 'double' en 'float', perte possible de données
+C:\Users\Galaad\Documents\Dev\Free\opengl\Live-Intro-OpenGL-Prep\src\camera.cpp(81,57): warning C4244: '=' : conversion de 'double' en 'float', perte possible de données
+  draw.cpp
+C:\Users\Galaad\Documents\Dev\Free\opengl\Live-Intro-OpenGL-Prep\src\app.h(12,10): warning C4200: extension non standard utilisée : tableau de taille zéro dans un struct/union
+C:\Users\Galaad\Documents\Dev\Free\opengl\Live-Intro-OpenGL-Prep\src\app.h(12,10): message : Ce membre va être ignoré par un constructeur par défaut, ou par un opérateur d'assignation de copie/déplacement
+C:\Users\Galaad\Documents\Dev\Free\opengl\Live-Intro-OpenGL-Prep\src\draw.h(7,2): warning C4091: 'typedef ' : ignoré à gauche de 'float3' quand aucune variable n'est déclarée
+C:\Users\Galaad\Documents\Dev\Free\opengl\Live-Intro-OpenGL-Prep\src\draw.h(10,2): warning C4091: 'typedef ' : ignoré à gauche de 'float2' quand aucune variable n'est déclarée
+C:\Users\Galaad\Documents\Dev\Free\opengl\Live-Intro-OpenGL-Prep\src\draw.cpp(75,20): warning C4244: 'argument' : conversion de 'int' en 'GLfloat', perte possible de données
+C:\Users\Galaad\Documents\Dev\Free\opengl\Live-Intro-OpenGL-Prep\src\draw.cpp(80,15): warning C4244: 'argument' : conversion de 'int' en 'GLfloat', perte possible de données
+C:\Users\Galaad\Documents\Dev\Free\opengl\Live-Intro-OpenGL-Prep\src\draw.cpp(85,20): warning C4244: 'argument' : conversion de 'int' en 'GLfloat', perte possible de données
+C:\Users\Galaad\Documents\Dev\Free\opengl\Live-Intro-OpenGL-Prep\src\draw.cpp(97,18): warning C4244: 'initialisation' : conversion de 'double' en 'float', perte possible de données
+C:\Users\Galaad\Documents\Dev\Free\opengl\Live-Intro-OpenGL-Prep\src\draw.cpp(98,14): warning C4244: 'initialisation' : conversion de 'double' en 'float', perte possible de données
+C:\Users\Galaad\Documents\Dev\Free\opengl\Live-Intro-OpenGL-Prep\src\draw.cpp(99,14): warning C4244: 'initialisation' : conversion de 'double' en 'float', perte possible de données
+C:\Users\Galaad\Documents\Dev\Free\opengl\Live-Intro-OpenGL-Prep\src\draw.cpp(101,19): warning C4244: 'initialisation' : conversion de 'double' en 'float', perte possible de données
+C:\Users\Galaad\Documents\Dev\Free\opengl\Live-Intro-OpenGL-Prep\src\draw.cpp(102,14): warning C4244: 'initialisation' : conversion de 'double' en 'float', perte possible de données
+C:\Users\Galaad\Documents\Dev\Free\opengl\Live-Intro-OpenGL-Prep\src\draw.cpp(103,14): warning C4244: 'initialisation' : conversion de 'double' en 'float', perte possible de données
+C:\Users\Galaad\Documents\Dev\Free\opengl\Live-Intro-OpenGL-Prep\src\draw.cpp(108,12): warning C4244: 'initialisation' : conversion de 'double' en 'float', perte possible de données
+C:\Users\Galaad\Documents\Dev\Free\opengl\Live-Intro-OpenGL-Prep\src\draw.cpp(109,12): warning C4244: 'initialisation' : conversion de 'double' en 'float', perte possible de données
+  lights.cpp
+C:\Users\Galaad\Documents\Dev\Free\opengl\Live-Intro-OpenGL-Prep\src\draw.h(7,2): warning C4091: 'typedef ' : ignoré à gauche de 'float3' quand aucune variable n'est déclarée
+C:\Users\Galaad\Documents\Dev\Free\opengl\Live-Intro-OpenGL-Prep\src\draw.h(10,2): warning C4091: 'typedef ' : ignoré à gauche de 'float2' quand aucune variable n'est déclarée
+C:\Users\Galaad\Documents\Dev\Free\opengl\Live-Intro-OpenGL-Prep\src\app.h(12,10): warning C4200: extension non standard utilisée : tableau de taille zéro dans un struct/union
+C:\Users\Galaad\Documents\Dev\Free\opengl\Live-Intro-OpenGL-Prep\src\app.h(12,10): message : Ce membre va être ignoré par un constructeur par défaut, ou par un opérateur d'assignation de copie/déplacement
+C:\Users\Galaad\Documents\Dev\Free\opengl\Live-Intro-OpenGL-Prep\src\lights.h(11,2): warning C4091: 'typedef ' : ignoré à gauche de 'lightsParam' quand aucune variable n'est déclarée
+  Génération de code en cours...
+C:\Users\Galaad\Documents\Dev\Free\opengl\Live-Intro-OpenGL-Prep\src\app.cpp(158): warning C4715: 'App::LoadTexture' : les chemins de contrôle ne retournent pas tous une valeur
+  Live-Intro-OpenGL-Prep.vcxproj -> C:\Users\Galaad\Documents\Dev\Free\opengl\x64\Debug\Live-Intro-OpenGL-Prep.exe

@@ -1,2 +1,7 @@
 .vs/*
 .vs
+x64/Debug/*.exe
+x64/Debug/*.pdb
+Debug/
+Live-Intro-OpenGL-Prep/Debug
+Live-Intro-OpenGL-Prep/x64
